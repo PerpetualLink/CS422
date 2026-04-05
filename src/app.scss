@@ -1,0 +1,9 @@
+.navigationBar {
+    height: 48px;
+}
+
+.pageContent {
+    display: flex;
+    flex-grow: 1;
+    height: calc(100vh - 56px);
+}

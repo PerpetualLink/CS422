@@ -34,3 +34,9 @@ This will build the project and provide you the location of the site the project
   ➜  Network: use --host to expose
   ➜  press h + enter to show help
 ```
+
+## Doucmentation
+
+- React: http://react.dev/learn
+
+- Material UI: https://mui.com/material-ui/getting-started/
