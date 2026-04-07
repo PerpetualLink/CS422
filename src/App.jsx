@@ -11,12 +11,6 @@ function App () {
     return (
         <div>
             <div className={"navigationBar"}>
-<<<<<<< Updated upstream
-                <Button onClick={() => setCurrentPage(0)}>{"Home"}</Button>
-                <Button onClick={() => setCurrentPage(1)}>{"Getting Started"}</Button>
-                <Button onClick={() => setCurrentPage(2)}>{"Buying Options"}</Button>
-                <Button onClick={() => setCurrentPage(3)}>{"Hidden Costs"}</Button>
-=======
                 <Typography
                     className={"navLogo"}
                     onClick={() => setCurrentPage(0)}
@@ -51,7 +45,6 @@ function App () {
                 >
                     {"Hidden Costs"}
                 </Button>
->>>>>>> Stashed changes
             </div>
             <div className={"pageContent"}>
                 {currentPage === 0 && (
