@@ -1,4 +1,4 @@
-import { Box, Typography, Card, CardContent, CardActionArea, Button } from "@mui/material";
+import { Box, Typography, Card, CardContent, CardActionArea } from "@mui/material";
 import HomeIcon from "@mui/icons-material/Home";
 import MenuBookIcon from "@mui/icons-material/MenuBook";
 import AccountBalanceIcon from "@mui/icons-material/AccountBalance";
@@ -57,14 +57,6 @@ function Home({ onNavigate }) {
                 <Typography variant="h6" className="home-hero__subtitle">
                     Your guide to buying your first home.
                 </Typography>
-                <Button
-                    variant="contained"
-                    size="large"
-                    className="home-hero__cta"
-                    onClick={() => onNavigate && onNavigate(1)}
-                >
-                    Get Started
-                </Button>
             </Box>
 
             {/* Feature Cards */}
