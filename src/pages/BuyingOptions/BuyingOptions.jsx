@@ -4,6 +4,7 @@ import Tabs from '@mui/material/Tabs';
 import Tab from '@mui/material/Tab';
 import Box from '@mui/material/Box';
 import Grid from '@mui/material/Grid';
+import '../Home/home.scss';
 function BuyingOptions(props) {
     const { children, value, index, ...other } = props;
 
@@ -21,9 +22,16 @@ function BuyingOptions(props) {
 }
 function BoxBasic({ text }) {
     return (
-        <Box component="section" sx={{
-            p: 1, border: '1px solid grey', width: '100%', height: '100%',
-            display: 'flex', alignItems: 'center', justifyContent: 'left', whiteSpace: "pre-line"
+        //throwing this here until someone makes a dedicated css that I can use
+        <Box sx={{
+             p: 1, 
+            width: '100%', 
+            height: '100%',
+            transform: 'none',
+            whiteSpace: "pre-line",
+            borderRadius: "8px",
+            boxShadow: 1,
+
         }}>
             {text}
         </Box>
@@ -31,8 +39,9 @@ function BoxBasic({ text }) {
 }
 function ResponsiveGrid({ items }) {
     return (
+        //same as above throwing this here until css
         <Box sx={{ flexGrow: 1 }}>
-                <Grid container spacing={3}>
+                <Grid className = "home-cards" container spacing={3}>
                 {items.map((item, index) => (
                     <Grid key={index} size={3}>
                         <BoxBasic text={item} />
