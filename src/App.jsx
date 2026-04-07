@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Button } from "@mui/material";
+import { Button, Typography } from "@mui/material";
 import "./app.scss";
 import Home from "./pages/Home";
 import GettingStarted from "./pages/GettingStarted";
@@ -11,6 +11,12 @@ function App () {
     return (
         <div>
             <div className={"navigationBar"}>
+                <Typography
+                    className={"navLogo"}
+                    onClick={() => setCurrentPage(0)}
+                >
+                    {"Foundation Labs"}
+                </Typography>
                 <Button
                     className={`navigationButton ${currentPage === 0 ? "active" : ""}`}
                     onClick={() => setCurrentPage(0)}
@@ -40,9 +46,9 @@ function App () {
                     {"Hidden Costs"}
                 </Button>
             </div>
-            <div className={"pageContent"}>
+            <div className={"pageContainer"}>
                 {currentPage === 0 && (
-                    <Home />
+                    <Home onNavigate={setCurrentPage} />
                 )}
                 {currentPage === 1 && (
                     <GettingStarted />

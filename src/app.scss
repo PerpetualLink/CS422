@@ -1,7 +1,25 @@
+body {
+    margin: unset;
+}
+
 .navigationBar {
+    align-items: center;
+    display: flex;
     height: 48px;
+    padding: 8px;
     width: 100%;
 
+    .navLogo {
+        color: #43A047;
+        cursor: pointer;
+        font-size: 18px;
+        font-weight: 700;
+        margin-right: 16px;
+
+        &:hover {
+            color: #33691E;
+        }
+    }
     .navigationButton {
         border-radius: 999px;
         font-size: 16px;
@@ -13,10 +31,14 @@
 
     .active {
         background-color: #43A047;
+
+        &:hover {
+            background-color: #388E3C;
+        }
     }
 }
 
-.pageContent {
+.pageContainer {
     display: flex;
     height: calc(100vh - 64px);
 }
