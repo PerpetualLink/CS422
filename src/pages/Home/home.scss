@@ -28,21 +28,7 @@
     &__subtitle {
         color: #444;
         max-width: 560px;
-        margin-bottom: 32px;
         line-height: 1.6;
-    }
-
-    &__cta {
-        background-color: #43A047 !important;
-        border-radius: 999px !important;
-        padding: 12px 36px !important;
-        font-size: 1rem !important;
-        text-transform: none !important;
-        margin-top: 16px !important;
-
-        &:hover {
-            background-color: #388E3C !important;
-        }
     }
 }
 
@@ -97,9 +83,6 @@
         margin-top: 4px;
     }
 
-    &--checklist {
-        background-color: #f9fbe7;
-    }
 }
 
 /* Stats card */

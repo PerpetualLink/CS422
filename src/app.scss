@@ -1,14 +1,11 @@
 .navigationBar {
-    height: 56px;
+    height: 64px;
     width: 100%;
     display: flex;
     align-items: center;
     padding: 0 24px 6px;
     box-sizing: border-box;
-    background-color: #fff;
     border-bottom: 1px solid #e0e0e0;
-    position: relative;
-    z-index: 10;
     gap: 8px;
 
     .navLogo {
@@ -16,20 +13,17 @@
         cursor: pointer;
         font-size: 18px !important;
         font-weight: 700 !important;
-        white-space: nowrap;
-        user-select: none;
         margin-right: 16px;
     }
 
     .navigationButton {
         border-radius: 999px;
         font-size: 16px;
-        height: 44px;
+        height: 48px;
         padding: 0;
         min-width: unset;
-        width: 160px;
+        width: 180px;
         text-transform: none;
-        flex-shrink: 0;
     }
 
     .active {
@@ -39,5 +33,5 @@
 
 .pageContent {
     display: flex;
-    height: calc(100vh - 56px);
+    height: calc(100vh - 64px);
 }
