@@ -44,9 +44,9 @@ function Glossary() {
     return (
         <div className={"container"}>
             <Button 
-                className={"glossaryButton"}
+                className={`glossaryButton ${isDrawerOpen ? "open" : ""}`}
                 variant="contained" 
-                onClick={() => setIsDrawerOpen(true)}
+                onClick={() => setIsDrawerOpen(previousState => !previousState)}
             >
                 Glossary
             </Button>

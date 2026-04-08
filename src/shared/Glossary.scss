@@ -13,5 +13,10 @@
         &:hover { 
             background-Color: #33691E;
         }
+
+        &.open{
+            right: 400px;
+            transition: 225ms;
+        }
     }
 }
