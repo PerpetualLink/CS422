@@ -115,7 +115,7 @@ function HiddenCosts() {
     const currentSection = costData[activeSection];
 
     return (
-        <Box sx={{ display: "flex", padding: "20px", maxWidth: "1400px", margin: "0 auto", gap: 3 }}>
+        <Box sx={{ display: "flex", padding: "20px", margin: "0 auto", gap: 3 }}>
             {/* Left Sidebar */}
             <Box sx={{ 
                 width: "200px", 

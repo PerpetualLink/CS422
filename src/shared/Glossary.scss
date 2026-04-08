@@ -2,17 +2,19 @@
     z-Index: 1000;
 
     .glossaryButton {
-        z-Index: 1500000;
-        position: absolute;
-        top: 64px;
-        right: 0;
-        width: 8px;
+        background: #43A047; 
+        border-bottom-right-radius: 0;
+        border-top-right-radius: 0;
         min-width: unset;
         overflow-wrap: anywhere;
-        background: green; 
+        position: absolute;
+        right: 0;
+        top: 64px;
+        width: 24px;
+        z-Index: 1500000;
         
         &:hover { 
-            background-Color: #33691E;
+            background: #388e3c;
         }
 
         &.open{

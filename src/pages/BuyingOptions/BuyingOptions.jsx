@@ -1,107 +1,184 @@
-import * as React from 'react';
-import PropTypes from 'prop-types';
-import Tabs from '@mui/material/Tabs';
-import Tab from '@mui/material/Tab';
-import Box from '@mui/material/Box';
-import Grid from '@mui/material/Grid';
-function BuyingOptions(props) {
-    const { children, value, index, ...other } = props;
+import { green, grey } from "@mui/material/colors";
+import "./BuyingOptions.scss";
+import { Divider, styled, Table, TableBody, TableCell, tableCellClasses, TableHead, TableRow } from '@mui/material';
+
+function BuyingOptions() {
+    const methods = {
+        Heading: [
+            "Factors", "Traditional", "FHA", "CASH"
+        ],
+        DownPayment: [
+            "DownPayment", "3-20%", "3.5%", "100%"
+        ],
+        CreditScore: [
+            "Credit Score", "~620+", "~580+", "Not Requried"
+        ],
+        ClosingSpeed: [
+            "Closing Speed", "Medium 3-45 Days", "Slow 45-60 Days", "Fast 7-13 Days"
+        ],
+        MonthlyPayment: [
+            "Monthly Payment", "High", "Strict", "Buyers Choice"
+        ],
+        Condition: [
+            "Condition", "Standard", "Strict", "Buyers Choice"
+        ],
+        BarrierToEntry: [
+            "Barrier To Entry", "Moderate (Credit/Cash)", "Low (Credit/Cash)", "High (Full Capital)"
+        ]
+    }
+
+    const paths = {
+        Heading: [
+            "Factors", "Real Estate Agent", "Tax Auction", "Home Owner"
+        ],
+        InformationTransparency: [
+            "Information Transparency", "High", "Limited", "Varies"
+        ],
+        ClosingSpeed: [
+            "Closing Speed", "30-45 Days", "1 Day (3-6 Weeks)", "30-60 Days"
+        ],
+        PriceLeverage: [
+            "Price Leverage", "Moderate", "None", "Moderate"
+        ],
+        Condition: [
+            "Condition", "Often Negotiable", "As-Is", "Highly Negotiable"
+        ],
+        TitleSafety: [
+            "Title Safety", "Safe", "Risky", "Safe but manual"
+        ],
+        FinancingOptions: [
+            "Financing Options", "Flexible", "Cash Only", "Flexible"
+        ]
+    }
+
+    const StyledTableCell = styled(TableCell)(({ theme }) => ({
+        [`&.${tableCellClasses.head}`]: {
+            backgroundColor: green[50],
+            color: theme.palette.common.black,
+            fontWeight: 600,
+            fontSize: "1rem",
+            paddingLeft: "16px",
+
+            '&:hover': {
+                backgroundColor: green[100], 
+            },
+            
+        },
+        [`&.${tableCellClasses.body}`]: {
+            fontSize: "1rem",
+            paddingLeft: "16px",
+            '&:hover': {
+                backgroundColor: grey[100], 
+            },
+        },
+    }));
+    const StyledTableRow = styled(TableRow)(({ theme }) => ({
+        '&:nth-of-type(odd)': {
+            backgroundColor: theme.palette.action.hover,
+        },
+        // hide last border
+        '&:last-child td, &:last-child th': {
+            border: 0,
+        },
+    }));
 
     return (
-        <div
-            role="tabpanel"
-            hidden={value !== index}
-            id={`simple-tabpanel-${index}`}
-            aria-labelledby={`simple-tab-${index}`}
-            {...other}
-        >
-            {value === index && <Box sx={{ p: 3 }}>{children}</Box>}
+        <div className={"container"}>
+            <div className={"categoryTitle"}>
+                <div>
+                    {"Home Buying Methods"}
+                </div>
+            </div>
+            <Table>
+                <TableHead>
+                    <StyledTableRow>
+                        {methods.Heading.map((heading) => (
+                            <StyledTableCell>{heading}</StyledTableCell>
+                        ))}
+                    </StyledTableRow>
+                </TableHead>
+                <TableBody>
+                    <TableRow>
+                        {methods.DownPayment.map((option) => (
+                            <StyledTableCell>{option}</StyledTableCell>
+                        ))}
+                    </TableRow>
+                    <TableRow>
+                        {methods.CreditScore.map((option) => (
+                            <StyledTableCell>{option}</StyledTableCell>
+                        ))}
+                    </TableRow>
+                    <TableRow>
+                        {methods.ClosingSpeed.map((option) => (
+                            <StyledTableCell>{option}</StyledTableCell>
+                        ))}
+                    </TableRow>
+                    <TableRow>
+                        {methods.MonthlyPayment.map((option) => (
+                            <StyledTableCell>{option}</StyledTableCell>
+                        ))}
+                    </TableRow>
+                    <TableRow>
+                        {methods.Condition.map((option) => (
+                            <StyledTableCell>{option}</StyledTableCell>
+                        ))}
+                    </TableRow>
+                    <TableRow>
+                        {methods.BarrierToEntry.map((option) => (
+                            <StyledTableCell>{option}</StyledTableCell>
+                        ))}
+                    </TableRow>
+                </TableBody>
+            </Table>
+            <Divider sx={{ margin: "64px 0", backgroundColor: "green"}}/>
+            <div className={"categoryTitle"}>
+                <div>
+                    {"Home Buying Paths"}
+                </div>
+            </div>
+            <Table>
+                <TableHead>
+                    <StyledTableRow>
+                        {paths.Heading.map((heading) => (
+                            <StyledTableCell>{heading}</StyledTableCell>
+                        ))}
+                    </StyledTableRow>
+                </TableHead>
+                <TableBody>
+                    <TableRow>
+                        {paths.InformationTransparency.map((option) => (
+                            <StyledTableCell>{option}</StyledTableCell>
+                        ))}
+                    </TableRow>
+                    <TableRow>
+                        {paths.ClosingSpeed.map((option) => (
+                            <StyledTableCell>{option}</StyledTableCell>
+                        ))}
+                    </TableRow>
+                    <TableRow>
+                        {paths.PriceLeverage.map((option) => (
+                            <StyledTableCell>{option}</StyledTableCell>
+                        ))}
+                    </TableRow>
+                    <TableRow>
+                        {paths.Condition.map((option) => (
+                            <StyledTableCell>{option}</StyledTableCell>
+                        ))}
+                    </TableRow>
+                    <TableRow>
+                        {paths.TitleSafety.map((option) => (
+                            <StyledTableCell>{option}</StyledTableCell>
+                        ))}
+                    </TableRow>
+                    <TableRow>
+                        {paths.FinancingOptions.map((option) => (
+                            <StyledTableCell>{option}</StyledTableCell>
+                        ))}
+                    </TableRow>
+                </TableBody>
+            </Table>
         </div>
     );
 }
-function BoxBasic({ text }) {
-    return (
-        //throwing this here until someone makes a dedicated css that I can use
-        <Box sx={{
-             p: 1, 
-            width: '100%', 
-            height: '100%',
-            transform: 'none',
-            whiteSpace: "pre-line",
-            borderRadius: "8px",
-            boxShadow: 1,
 
-        }}>
-            {text}
-        </Box>
-    );
-}
-function ResponsiveGrid({ items }) {
-    return (
-        //same as above throwing this here until css
-        <Box sx={{ flexGrow: 1 }}>
-                <Grid className = "home-cards" container spacing={3}>
-                {items.map((item, index) => (
-                    <Grid key={index} size={3}>
-                        <BoxBasic text={item} />
-                    </Grid>
-                ))}
-            </Grid>
-        </Box>
-    );
-}
-BuyingOptions.propTypes = {
-    children: PropTypes.node,
-    index: PropTypes.number.isRequired,
-    value: PropTypes.number.isRequired,
-};
-function a11yProps(index) {
-    return {
-        id: `simple-tab-${index}`,
-        'aria-controls': `simple-tabpanel-${index}`,
-    };
-}
-
-export default function BasicTabs() {
-    const [value, setValue] = React.useState(0);
-
-    const handleChange = (event, newValue) => {
-        setValue(newValue);
-    };
-
-    return (
-        <Box sx={{ width: '100%' }}>
-            <Box sx={{ borderBottom: 1, borderColor: 'divider' }}>
-                {/* <Tabs value={value} onChange={handleChange} aria-label="basic tabs example">
-                    <Tab label="Methods" {...a11yProps(0)} />
-                    <Tab label="Paths" {...a11yProps(1)} />
-                </Tabs> */}
-            </Box>
-            <BuyingOptions value={value} index={0}>
-                <ResponsiveGrid items={[
-                    "Factors",
-                    "Traditional",
-                    "FHA",
-                    "Cash",
-                    `Down Payment`,`3–20%`,`3.5%`,`100%`,
-                    `Credit Score `,`~620+`,`~580+`,`Not required`,
-                    `Closing Speed`,`Medium 30-45 days`,`Slow 45-60 days`,`Fast 7-14 days`,
-                    `Monthly Payment`,`High`,`Moderate`,`Lowest`,
-                    `Condition`,`Standard`,`Strict`,`Buyers Choice`,
-                    `Barrier to Entry`,`Moderate(Credit/Cash)`,`Low(Credit/Cash)`,`High(Full Capital)`,
-
-                    ]} />
-                <ResponsiveGrid items={["Factors","Real Estate Agent","Tax Auction","Home Owner",
-                    "Information Transparency",`High`,`Limited`,`Varies`,
-                    `Closing Speed`,`30-45 days`,`1 day (3-6 weeks)`,`30-60 days`,
-                    `Price Leverage`,`Moderate`,`None`,`Moderate`,
-                    `Condition`,`Often negotiable`,`As is`,`Highly negotiable`,
-                    `Title Safety`,`Safe`,`Dangerous`,`Safe but manual`,
-                    `Financing Options`,`Flexible`,`Cash only`,`Flexible`]} />
-            </BuyingOptions>
-            <BuyingOptions value={value} index={1}>
-
-            </BuyingOptions>
-        </Box>
-    );
-}
+export default BuyingOptions
