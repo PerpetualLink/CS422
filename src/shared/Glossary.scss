@@ -3,13 +3,15 @@
 
     .glossaryButton {
         position: absolute;
-        top: 0;
+        top: 64px;
         right: 0;
-
-        background-Color: #1976d2; 
+        width: 8px;
+        min-width: unset;
+        overflow-wrap: anywhere;
+        background: green; 
         
         &:hover { 
-            background-Color: #1565c0;
+            background-Color: #33691E;
         }
     }
 }
