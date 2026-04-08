@@ -1,5 +1,15 @@
 .container {
-    position: absolute;
-    top: 0;
-    right: 0;
+    z-Index: 1000;
+
+    .glossaryButton {
+        position: absolute;
+        top: 0;
+        right: 0;
+
+        background-Color: #1976d2; 
+        
+        &:hover { 
+            background-Color: #1565c0;
+        }
+    }
 }

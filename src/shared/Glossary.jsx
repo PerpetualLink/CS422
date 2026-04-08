@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { Button, Drawer, Box, Typography, IconButton } from "@mui/material";
 import CloseIcon from "@mui/icons-material/Close";
+import "./Glossary.scss";
 
 function Glossary() {
     const [isDrawerOpen, setIsDrawerOpen] = useState(false);
@@ -41,20 +42,11 @@ function Glossary() {
     ];
 
     return (
-        <>
+        <div className={"container"}>
             <Button 
+                className={"glossaryButton"}
                 variant="contained" 
                 onClick={() => setIsDrawerOpen(true)}
-                sx={{ 
-                    position: "fixed", 
-                    top: 20, 
-                    right: 20, 
-                    zIndex: 1000,
-                    backgroundColor: "#1976d2", 
-                    '&:hover': { 
-                        backgroundColor: "#1565c0" 
-                    }
-                }}
             >
                 Glossary
             </Button>
@@ -114,7 +106,7 @@ function Glossary() {
                     ))}
                 </Box>
             </Drawer>
-        </>
+        </div>
     );
 }
 
