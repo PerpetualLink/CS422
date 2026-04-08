@@ -51,7 +51,7 @@ export default function HomeSavingsCalculator({ onClose, isDraggable = true }) {
         </div>
 
         <div>
-          <h2 style={{ marginBottom: 16 }}>Home Savings Calculator</h2>
+          <h2 style={{fontFamily: "Roboto",marginBottom: 16 }}>Home Savings Calculator</h2>
 
           <label style={s.label}>House Price</label>
           <input type="number" value={homePrice} onChange={(e) => setHomePrice(Number(e.target.value))} style={s.input} />
@@ -74,7 +74,7 @@ export default function HomeSavingsCalculator({ onClose, isDraggable = true }) {
             {pmi && <p>PMI Cushion: {fmt(pmiBuffer)}</p>}
           </div>
 
-          <div style={{ marginTop: 16, fontWeight: 600, fontSize: 16 }}>
+          <div style={{fontFamily: "Roboto", marginTop: 16, fontWeight: 600, fontSize: 16 }}>
             Recommended Savings:
             <span style={{ display: "block", fontSize: 24, marginTop: 4 }}>{fmt(recommendedSavings)}</span>
           </div>
