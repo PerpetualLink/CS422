@@ -1,6 +1,11 @@
+import { Button } from "@mui/material";
+import "./Glossary.scss";
+
 function Glossary() {
     return (
-        <div></div>
+        <div className={"container"}>
+            <Button>{"Glossary"}</Button>
+        </div>
     );
 }
 
