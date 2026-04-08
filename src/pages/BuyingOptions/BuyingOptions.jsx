@@ -72,81 +72,35 @@ export default function BasicTabs() {
     return (
         <Box sx={{ width: '100%' }}>
             <Box sx={{ borderBottom: 1, borderColor: 'divider' }}>
-                <Tabs value={value} onChange={handleChange} aria-label="basic tabs example">
+                {/* <Tabs value={value} onChange={handleChange} aria-label="basic tabs example">
                     <Tab label="Methods" {...a11yProps(0)} />
                     <Tab label="Paths" {...a11yProps(1)} />
-                </Tabs>
+                </Tabs> */}
             </Box>
             <BuyingOptions value={value} index={0}>
-                <ResponsiveGrid items={[" ",
-                    "Traditional Mortgage",
-                    "FHA Loan",
+                <ResponsiveGrid items={[
+                    "Factors",
+                    "Traditional",
+                    "FHA",
                     "Cash",
-                    "Pros",
-                    `•Wide availability from many lenders
-                    •Potentially lower long-term costs if you put 20% down (avoids PMI)
-                    •Flexible loan terms (15-year, 30-year, etc.)
-                    •Often faster closing than government-backed loans
-                    •Good option for buyers with strong credit`,
-                    `•Lower down payment requirements (as low as 3.5%)
-                    •More flexible credit score requirements
-                    •Easier approval for buyers with limited credit history
-                    •Popular for first-time homebuyers`,
-                    `•No mortgage payments or interest
-                    •Faster closing process
-                    •Often stronger negotiating power with sellers
-                    •No loan approval or underwriting required
-                    •No mortgage-related fees or insurance`,
-                    `Cons`,
-                    `•Higher credit score requirements (often ~620+ minimum)
-                    •May require larger down payments than some programs
-                    •PMI required if down payment is under 20%
-                    •Stricter financial documentation`,
-                    `•Mortgage insurance required for the life of the loan in many cases
-                    •Property must meet FHA inspection standards
-                    •Loan limits may restrict higher-priced homes
-                    •Can be slightly more paperwork and processing`,
-                    `•Requires very large upfront savings
-                    •Reduces available cash for emergencies or investments
-                    •Less leverage compared to financing
-                    •Opportunity cost of tying money up in real estate`]} />
+                    `Down Payment`,`3–20%`,`3.5%`,`100%`,
+                    `Credit Score `,`~620+`,`~580+`,`Not required`,
+                    `Closing Speed`,`Medium 30-45 days`,`Slow 45-60 days`,`Fast 7-14 days`,
+                    `Monthly Payment`,`High`,`Moderate`,`Lowest`,
+                    `Condition`,`Standard`,`Strict`,`Buyers Choice`,
+                    `Barrier to Entry`,`Moderate(Credit/Cash)`,`Low(Credit/Cash)`,`High(Full Capital)`,
+
+                    ]} />
+                <ResponsiveGrid items={["Factors","Real Estate Agent","Tax Auction","Home Owner",
+                    "Information Transparency",`High`,`Limited`,`Varies`,
+                    `Closing Speed`,`30-45 days`,`1 day (3-6 weeks)`,`30-60 days`,
+                    `Price Leverage`,`Moderate`,`None`,`Moderate`,
+                    `Condition`,`Often negotiable`,`As is`,`Highly negotiable`,
+                    `Title Safety`,`Safe`,`Dangerous`,`Safe but manual`,
+                    `Financing Options`,`Flexible`,`Cash only`,`Flexible`]} />
             </BuyingOptions>
             <BuyingOptions value={value} index={1}>
-                <ResponsiveGrid items={[" ",
-                    "Real Estate Agent",
-                    "Tax Auction",
-                    "Home Owner",
-                    "Description",
-                    `A real estate agent helps buyers find homes, negotiate offers, and manage paperwork throughout the purchasing process. Agents are licensed professionals who understand the housing market and transaction procedures.`,
-                    `A tax auction is a public sale where properties are sold by a government entity because the owner failed to pay property taxes. Investors or buyers can bid on these properties, sometimes at significantly reduced prices.`,
-                    `A direct purchase from the homeowner (commonly called For Sale By Owner or FSBO) occurs when the seller lists and sells the property without using a real estate agent, negotiating directly with the buyer.`,
-                    `Pros`,
-                    `•Professional guidance throughout the buying process
-                    •Access to Multiple Listing Service (MLS) properties
-                    •Help negotiating price and contingencies
-                    •Assistance with inspections, paperwork, and closing
-                    •Helpful for first-time buyers`,
-                    `•Professional guidance throughout the buying process
-                    •Access to Multiple Listing Service (MLS) properties
-                    •Help negotiating price and contingencies
-                    •Assistance with inspections, paperwork, and closing
-                    •Helpful for first-time buyers`,
-                    `•Potentially lower overall transaction costs
-                    •Direct communication with the seller
-                    •Possible flexibility in negotiation terms
-                    •Sometimes lower listing price due to no agent commission`,
-                    `Cons`,
-                    `•Agent commissions are built into the transaction cost
-                    •Buyers may rely heavily on agent recommendations
-                    •Less direct control over the negotiation process`,
-                    `•Limited ability to inspect the property beforehand
-                    •Property may have liens, legal issues, or damage
-                    •Often requires cash payment
-                    •Higher risk than traditional purchases`,
-                    `•Seller may lack professional pricing guidance
-                    •Buyers may need to manage more paperwork themselves
-                    •Negotiations may be less structured
-                    •Increased risk of missing legal or procedural details `]} />
+
             </BuyingOptions>
         </Box>
     );
