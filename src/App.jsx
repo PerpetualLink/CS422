@@ -5,6 +5,7 @@ import Home from "./pages/Home";
 import GettingStarted from "./pages/GettingStarted";
 import BuyingOptions from "./pages/BuyingOptions";
 import HiddenCosts from "./pages/HiddenCosts";
+import Glossary from "./shared/Glossary";
 
 function App () {
     const [currentPage, setCurrentPage] = useState(0);
@@ -60,6 +61,7 @@ function App () {
                     <HiddenCosts />
                 )}
             </div>
+            <Glossary />
         </div>
     );
 }
