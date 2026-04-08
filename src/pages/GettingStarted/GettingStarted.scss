@@ -1,0 +1,137 @@
+.gettingStartedContainer {
+    display: flex;
+    gap: 32px;
+    padding: 32px;
+    height: 100%;
+    overflow-y: auto;
+    background-color: #f5f5f5;
+
+    .leftSection {
+        flex: 0 0 55%;
+        display: flex;
+        flex-direction: column;
+        gap: 24px;
+
+        .contentCard {
+            border-radius: 8px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+
+            .pageTitle {
+                font-size: 28px;
+                font-weight: 600;
+                margin: 0 0 16px 0;
+                color: #333;
+            }
+
+            .summaryText {
+                font-size: 14px;
+                line-height: 1.6;
+                color: #555;
+                margin: 0 0 16px 0;
+            }
+
+            .toggleButton {
+                margin-bottom: 16px;
+                text-transform: none;
+                font-size: 14px;
+            }
+
+            .detailedText {
+                font-size: 14px;
+                line-height: 1.6;
+                color: #666;
+                margin: 16px 0 0 0;
+                padding-top: 16px;
+                border-top: 1px solid #e0e0e0;
+                animation: slideDown 0.3s ease-in-out;
+            }
+        }
+
+        .budgetCard {
+            border-radius: 8px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+
+            .budgetTitle {
+                font-size: 18px;
+                font-weight: 600;
+                margin: 0 0 16px 0;
+                color: #333;
+            }
+
+            .budgetItem {
+                display: flex;
+                align-items: center;
+                gap: 12px;
+
+                .budgetIcon {
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                    width: 40px;
+                    height: 40px;
+                    border-radius: 50%;
+                    background-color: #2196f3;
+                    color: white;
+                    font-size: 24px;
+                    font-weight: bold;
+                }
+
+                .budgetText {
+                    font-size: 16px;
+                    font-weight: 500;
+                    color: #333;
+                }
+            }
+        }
+    }
+
+    .rightSection {
+        flex: 0 0 40%;
+
+        .calculatorCard {
+            border-radius: 8px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+
+            .calculatorTitle {
+                font-size: 18px;
+                font-weight: 600;
+                margin: 0 0 16px 0;
+                color: #333;
+            }
+
+            .calculatorPlaceholder {
+                font-size: 14px;
+                color: #999;
+                text-align: center;
+                padding: 40px 20px;
+            }
+        }
+    }
+}
+
+@keyframes slideDown {
+    from {
+        opacity: 0;
+        max-height: 0;
+    }
+    to {
+        opacity: 1;
+        max-height: 1000px;
+    }
+}
+
+// Responsive design
+@media (max-width: 1200px) {
+    .gettingStartedContainer {
+        flex-direction: column;
+        gap: 24px;
+
+        .leftSection {
+            flex: 1;
+        }
+
+        .rightSection {
+            flex: 1;
+        }
+    }
+}
