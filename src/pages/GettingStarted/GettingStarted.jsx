@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { Button, Card, CardContent, Box } from "@mui/material";
+import HomeSavingsCalculator from "../../shared/HomeSavingsCalculator";
 import "./GettingStarted.scss";
 
 function GettingStarted() {
@@ -33,6 +34,9 @@ function GettingStarted() {
                         )}
                     </CardContent>
                 </Card>
+            </div>
+            <div className="rightSection">
+                <HomeSavingsCalculator isDraggable={false} />
             </div>
         </div>
     );

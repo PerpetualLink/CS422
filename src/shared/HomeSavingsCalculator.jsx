@@ -4,7 +4,7 @@ function fmt(value) {
   return value.toLocaleString("en-US", { style: "currency", currency: "USD", maximumFractionDigits: 0 });
 }
 
-export default function HomeSavingsCalculator({ onClose }) {
+export default function HomeSavingsCalculator({ onClose, isDraggable = true }) {
   const [homePrice, setHomePrice] = useState(300000);
   const [downPercent, setDownPercent] = useState(20);
   const [pmi, setPmi] = useState(false);
@@ -12,6 +12,7 @@ export default function HomeSavingsCalculator({ onClose }) {
   const [pos, setPos] = useState({ x: window.innerWidth / 2 - 220, y: 100 });
 
   const onMouseDown = useCallback((e) => {
+    if (!isDraggable) return;
     if (e.target.tagName === "INPUT") return;
     const startX = e.clientX - pos.x;
     const startY = e.clientY - pos.y;
@@ -19,7 +20,7 @@ export default function HomeSavingsCalculator({ onClose }) {
     const onMouseUp = () => { document.removeEventListener("mousemove", onMouseMove); document.removeEventListener("mouseup", onMouseUp); };
     document.addEventListener("mousemove", onMouseMove);
     document.addEventListener("mouseup", onMouseUp);
-  }, [pos]);
+  }, [pos, isDraggable]);
 
   const downPayment = homePrice * (downPercent / 100);
   const closingCosts = homePrice * 0.03;
@@ -32,9 +33,9 @@ export default function HomeSavingsCalculator({ onClose }) {
   const barColor = ratio < 0.5 ? "#E5484D" : ratio < 1 ? "#F5A524" : "#22C55E";
 
   return (
-    <div onMouseDown={onMouseDown} style={{ position: "fixed", left: pos.x, top: pos.y, zIndex: 1000, cursor: "grab", userSelect: "none" }}>
+    <div onMouseDown={onMouseDown} style={{ position: isDraggable ? "fixed" : "relative", left: isDraggable ? pos.x : 0, top: isDraggable ? pos.y : 0, zIndex: 1000, cursor: isDraggable ? "grab" : "auto", userSelect: "none" }}>
       <div style={s.wrapper}>
-        <button onClick={onClose} style={s.closeBtn}>✕</button>
+        {isDraggable && onClose && <button onClick={onClose} style={s.closeBtn}>✕</button>}
 
         <div>
           <label style={s.label}>Amount Saved</label>
