@@ -1,6 +1,6 @@
 body {
     margin: unset;
-    font-family: "roboto";
+    font-family: "Roboto", sans-serif !important;
 }
 
 .navigationBar {
@@ -12,20 +12,21 @@ body {
 
     .navLogo {
         color: #43A047;
+        flex-grow: 1;
         font-size: 18px;
         font-weight: 700;
         margin-right: 16px;
     }
     
     .navButton {
+        align-items: center;
+        border-radius: 999px;
         color: #616161;
         display: flex;
-        align-items: center;
         font-size: 15px;
         height: 44px;
         padding: 0 14px;
         margin: 0 6px;
-        border-radius: 999px;
         text-decoration: none;
         width: fit-content;
 
