@@ -1,50 +1,52 @@
 import { useState } from "react";
-import { Button, Typography } from "@mui/material";
+import { Typography } from "@mui/material";
 import "./app.scss";
 import Home from "./pages/Home";
 import GettingStarted from "./pages/GettingStarted";
 import BuyingOptions from "./pages/BuyingOptions";
 import HiddenCosts from "./pages/HiddenCosts";
 import Glossary from "./shared/Glossary";
+import { BrowserRouter, Link, Route, Routes } from "react-router-dom";
 
 const pages = [
-    { label: "Home", component: Home },
-    { label: "Getting Started", component: GettingStarted },
-    { label: "Buying Options", component: BuyingOptions },
-    { label: "Hidden Costs", component: HiddenCosts },
+    { name: "Home", route: "/CS422/" },
+    { name: "Getting Started", route: "/CS422/GettingStarted" },
+    { name: "Financing", route: "/CS422/Financing" },
+    { name: "Methods of Acquisition", route: "/CS422/MethodsOfAcquisition" },
+    { name: "Hidden Costs", route: "/CS422/HiddenCosts" }
 ];
 
 function App() {
-    const [currentPage, setCurrentPage] = useState(0);
-    const PageComponent = pages[currentPage].component;
+    const [currentRoute, setCurrentRoute] = useState(window.location.pathname);
 
     return (
-        <div>
+        <BrowserRouter>
             <nav className="navigationBar">
                 <Typography
                     className="navLogo"
-                    onClick={() => setCurrentPage(0)}
                 >
                     Foundation Labs
                 </Typography>
-                {pages.map((page, index) => (
-                    <Button
-                        key={page.label}
-                        className={`navigationButton ${currentPage === index ? "active" : ""}`}
-                        onClick={() => setCurrentPage(index)}
-                        variant="contained"
+                {pages.map((navItem) => (
+                    <Link
+                        className={`navButton ${(currentRoute === navItem.route) ? "active" : ""}`}
+                        onClick={() => setCurrentRoute(navItem.route)}
+                        to={navItem.route}
                     >
-                        {page.label}
-                    </Button>
+                        {navItem.name}
+                    </Link>
                 ))}
             </nav>
-            <div className="pageContent">
-                <PageComponent
-                    {...(currentPage === 0 ? { onNavigate: setCurrentPage } : {})}
-                />
-            </div>
             <Glossary />
-        </div>
+            
+            <Routes>
+                <Route path="/CS422/" element={<Home />} />
+                <Route path="/CS422/GettingStarted" element={<GettingStarted />} />
+                <Route path="/CS422/Financing" element={<BuyingOptions />} />
+                <Route path="/CS422/MethodsOfAcquisition" element={<BuyingOptions />} />
+                <Route path="/CS422/HiddenCosts" element={<HiddenCosts />} />
+            </Routes>
+        </BrowserRouter>
     );
 }
 
