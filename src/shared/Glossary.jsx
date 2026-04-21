@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { Button, Drawer, Box, Typography, IconButton } from "@mui/material";
 import CloseIcon from "@mui/icons-material/Close";
+import MenuBookIcon from "@mui/icons-material/MenuBook";
 import "./Glossary.scss";
 
 function Glossary() {
@@ -43,10 +44,11 @@ function Glossary() {
 
     return (
         <div className={"container"}>
-            <Button 
-                className={`glossaryButton ${isDrawerOpen ? "open" : ""}`}
-                variant="contained" 
-                onClick={() => setIsDrawerOpen(previousState => !previousState)}
+            <Button
+                className="glossaryButton"
+                variant="contained"
+                startIcon={<MenuBookIcon />}
+                onClick={() => setIsDrawerOpen(prev => !prev)}
             >
                 Glossary
             </Button>

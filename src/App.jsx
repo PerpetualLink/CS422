@@ -36,8 +36,8 @@ function App() {
                         {navItem.name}
                     </Link>
                 ))}
+                <Glossary />
             </nav>
-            <Glossary />
             
             <Routes>
                 <Route path="/CS422/" element={<Home />} />
