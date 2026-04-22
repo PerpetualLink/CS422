@@ -3,9 +3,17 @@ export const keywords = [
         TERM: "Cash Purchase",
         DEFINITION: "A cash purchase means buying a home without taking out a mortgage, paying the full purchase price upfront."
     },
+    {
+        TERM: "Closing costs",
+        DEFINITION: "Fees paid at the end of the home purchase. Typically 2-5% of the home price, covering title insurance, appraisal, attorney fees, and more."
+    },
     { 
         TERM: "Contingency",
         DEFINITION: "A condition that must be met for a real estate contract to become legally binding. Common contingencies include the home passing inspection, the buyer securing financing, and the appraisal meeting the purchase price."
+    },
+    {
+        TERM: "Conventional",
+        DEFINITION: "A standard mortgage not backed by the government. Requires better credit than FHA but offers more flexibility."
     },
     {
         TERM: "FHA Loan",
