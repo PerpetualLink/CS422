@@ -1,17 +1,88 @@
+@use "sass:color";
 
-.container {
-    .categoryTitle {
-        align-items: center;
+$green-700: #2e7d32;
+$green-50: #e8f5e9;
+$green-200: #a5d6a7;
+$green-800: #1b5e20;
+$green-900: #1b4d20;
+$grey-200: #eeeeee;
+$grey-300: #e0e0e0;
+$amber-50: #fff8e1;
+$amber-700: #ffa000;
+
+.financingContainer {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 32px 24px;
+
+    &__eyebrow {
+        color: $green-800;
+        font-weight: 600;
+        letter-spacing: 2px;
+    }
+}
+
+.recommendationCard {
+    margin-bottom: 48px;
+    border: 2px solid $green-700 !important;
+    border-radius: 8px !important;
+    overflow: hidden;
+
+    .profileBar {
+        background-color: $green-50;
+        border-bottom: 1px solid $green-200;
+        padding: 16px 32px;
         display: flex;
-        font-size: 1.4rem;
-        font-weight: bold;
+        align-items: center;
+        justify-content: space-between;
+        flex-wrap: wrap;
         gap: 16px;
-        margin: 16px 0;
-        padding: 0 8px;
     }
 
-    .categoryDescription {
-        font-size: 1rem;
-        font-weight: 500;
+    .eyebrow {
+        color: $green-900;
+        font-size: .85rem;
+        font-weight: 700;
+        letter-spacing: 1px;
+        text-transform: uppercase;
+    }
+}
+
+.reasoningPanel {
+    margin-top: 16px;
+    background-color: $amber-50;
+    border-left: 3px solid $amber-700;
+    padding: 24px;
+
+    &.noWarnings {
+        background-color: $green-50;
+        border-left: 3px solid $green-700;
+    }
+}
+
+.compareDivider__line {
+    flex: 1;
+    height: 1px;
+    background-color: $grey-300;
+}
+
+.nextStepCard {
+    margin-top: 48px;
+    padding: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 16px;
+
+    &__cta {
+        margin-right: 24px !important;
+        background-color: $green-800 !important;
+        text-transform: none !important;
+        font-weight: 600 !important;
+
+        &:hover {
+            background-color: $green-900 !important;
+        }
     }
 }

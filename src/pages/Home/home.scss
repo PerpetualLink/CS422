@@ -41,6 +41,12 @@
     padding: 32px 48px 48px;
     width: 100%;
     box-sizing: border-box;
+
+    .home-card:last-child {
+        grid-column: 1 / -1;
+        width: calc(50% - 12px);
+        justify-self: center;
+    }
 }
 
 /* Individual card */
@@ -90,6 +96,10 @@
     .home-cards {
         grid-template-columns: 1fr;
         padding: 24px 16px;
+
+        .home-card:last-child {
+            width: 100%;
+        }
     }
 
     .home-hero {
