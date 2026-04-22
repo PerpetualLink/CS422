@@ -5,8 +5,10 @@ import MenuBookIcon from "@mui/icons-material/MenuBook";
 import { keywords } from "./GlossaryTerms.js";
 import "./Glossary.scss";
 import { Search } from "@mui/icons-material";
+import { useBuyerProfile } from "./BuyerProfileContext.jsx";
 
 function Glossary() {
+    const { profile, updateProfile } = useBuyerProfile();
     const [isDrawerOpen, setIsDrawerOpen] = useState(false);
     const [searchWord, setSearchWord] = useState("");
     const [wordList, setWordList] = useState(keywords);
@@ -24,21 +26,31 @@ function Glossary() {
         }
     }, [keywords, searchWord, wordList])
 
+    useEffect(() => {
+        if (profile.glossaryWord) {
+            setSearchWord(profile.glossaryWord);
+        }
+    }, [profile])
+
+    const toggleDrawer = () => {        
+        updateProfile({ "glossaryOpen": !profile.glossaryOpen });
+    }
+
     return (
         <div className={"container"}>
             <Button
                 className="glossaryButton"
                 variant="contained"
                 startIcon={<MenuBookIcon />}
-                onClick={() => setIsDrawerOpen(prev => !prev)}
+                onClick={toggleDrawer}
             >
                 {"Glossary"}
             </Button>
 
             <Drawer
                 anchor="right"
-                open={isDrawerOpen}
-                onClose={() => setIsDrawerOpen(false)}
+                open={profile.glossaryOpen}
+                onClose={toggleDrawer}
                 sx={{
                     '& .MuiDrawer-paper': {
                         width: 400,
@@ -61,7 +73,7 @@ function Glossary() {
                     <Typography variant="h5" sx={{ fontWeight: "bold", color: "#1b1b1b" }}>
                         {"Glossary"}
                     </Typography>
-                    <IconButton onClick={() => setIsDrawerOpen(false)}>
+                    <IconButton onClick={toggleDrawer}>
                         <CloseIcon />
                     </IconButton>
                 </Box>

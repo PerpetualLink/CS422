@@ -12,6 +12,7 @@ const defaultProfile = {
     pmi: false,
     creditScore: 640,   // not captured in current calculator; used by Financing logic
     timeline: "medium", // 'urgent' | 'medium' | 'flexible'
+    glossaryOpen: false
 };
 
 const BuyerProfileContext = createContext({

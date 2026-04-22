@@ -63,6 +63,6 @@ body {
 
 .pageContainer {
     display: flex;
-    height: calc(100vh - 95px);
-    padding: 8px;
+    height: calc(100vh - 60.8px);
+    overflow-y: auto;
 }

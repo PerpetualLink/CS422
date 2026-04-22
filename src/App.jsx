@@ -15,7 +15,7 @@ function App() {
 
     return (
     <BuyerProfileProvider>
-        <BrowserRouter>
+        <BrowserRouter clasName={"appContainer"}>
             <nav className="navigationBar">
                 <Typography
                     className="navLogo"
@@ -36,11 +36,10 @@ function App() {
             </nav>
             
             <Routes>
-                <Route path="/CS422/" element={<Home />} />
-                <Route path="/CS422/GettingStarted" element={<GettingStarted />} />
-                <Route path="/CS422/Financing" element={<BuyingOptions />} />
-                <Route path="/CS422/MethodsOfAcquisition" element={<BuyingOptions />} />
-                <Route path="/CS422/HiddenCosts" element={<HiddenCosts />} />
+                <Route path="/CS422/" element={<div className="pageContainer"><Home /> </div>} />
+                <Route path="/CS422/GettingStarted" element={<div className="pageContainer"> <GettingStarted /> </div>} />
+                <Route path="/CS422/Financing" element={<div className="pageContainer"><BuyingOptions /> </div>} />
+                <Route path="/CS422/HiddenCosts" element={<div className="pageContainer"><HiddenCosts /> </div>} />
             </Routes>
         </BrowserRouter>
     </BuyerProfileProvider>

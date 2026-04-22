@@ -2,9 +2,12 @@ import { Box, Tooltip, Typography } from "@mui/material";
 import { green } from "@mui/material/colors";
 import { keywords } from "../../../shared/GlossaryTerms";
 import "./GlossaryTerm.scss";
+import { useBuyerProfile } from "../../../shared/BuyerProfileContext";
 
 
 function GlossaryTerm({ term, children }) {
+    const { updateProfile } = useBuyerProfile();
+
     return (
         <Tooltip
             title={
@@ -18,6 +21,7 @@ function GlossaryTerm({ term, children }) {
                 </Box>
             }
             arrow
+            onClick={() => updateProfile({ "glossaryOpen": true, "glossaryWord": term })}
             placement="top"
         >
             <Box component="span" className="glossaryTerm">

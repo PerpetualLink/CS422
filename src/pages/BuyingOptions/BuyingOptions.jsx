@@ -36,7 +36,7 @@ function BuyingOptions() {
                 <Typography variant="h3" sx={{ fontWeight: 700, color: grey[900], lineHeight: 1.15, mb: 1.5 }}>
                     How will you pay for it?
                 </Typography>
-                <Typography variant="h6" sx={{ color: grey[600], maxWidth: 720, fontWeight: 400 }}>
+                <Typography variant="h6" sx={{ color: grey[600], fontWeight: 400 }}>
                     There's no single right answer — the best path depends on your savings,
                     credit, and timeline. Here's what we recommend for <em>you</em>.
                 </Typography>
@@ -73,7 +73,7 @@ function BuyingOptions() {
                         Our recommendation
                     </Typography>
                     <Typography variant="h4" sx={{ fontWeight: 700, color: grey[900], mt: 1, mb: 3, lineHeight: 1.2 }}>
-                        Start with an <GlossaryTerm term="FHA">{method.label.toLowerCase()}</GlossaryTerm>
+                        Start with an <GlossaryTerm term="FHA">{method.label}</GlossaryTerm>
                         {" · "}work with a {pathRec.path.toLowerCase()}
                     </Typography>
 
@@ -143,10 +143,14 @@ function BuyingOptions() {
                         Why we recommended this
                     </Button>
                     <Collapse in={showWhy}>
-                        <Box className="reasoningPanel">
+                        <Box className={`reasoningPanel ${(profile.creditScore > 620 && profile.saved >= downPayment && recommendation.method !== "FHA") ? "noWarnings" : ""}`}>
                             <Stack spacing={1.5}>
                                 <Stack direction="row" spacing={1.5} alignItems="flex-start">
-                                    <CheckCircleOutline fontSize="small" sx={{ color: green[700], mt: 0.25, flexShrink: 0 }} />
+                                    {(profile.creditScore < 620) ? (
+                                        <WarningAmber fontSize="small" sx={{ color: amber[700], mt: 0.25, flexShrink: 0 }} />
+                                    ): (
+                                        <CheckCircleOutline fontSize="small" sx={{ color: green[700], mt: 0.25, flexShrink: 0 }} />
+                                    )}
                                     <Typography variant="body2" sx={{ color: grey[800], lineHeight: 1.6 }}>
                                         Your credit score of <strong>{profile.creditScore}</strong>
                                         {profile.creditScore < 620
@@ -155,7 +159,12 @@ function BuyingOptions() {
                                     </Typography>
                                 </Stack>
                                 <Stack direction="row" spacing={1.5} alignItems="flex-start">
-                                    <CheckCircleOutline fontSize="small" sx={{ color: green[700], mt: 0.25, flexShrink: 0 }} />
+                                    {(profile.saved >= downPayment) ? (
+                                        <CheckCircleOutline fontSize="small" sx={{ color: green[700], mt: 0.25, flexShrink: 0 }} />
+                                    ) : (
+                                        <WarningAmber fontSize="small" sx={{ color: amber[700], mt: 0.25, flexShrink: 0 }} />
+                                    )
+                                    }
                                     <Typography variant="body2" sx={{ color: grey[800], lineHeight: 1.6 }}>
                                         At 3.5% down, you'd need ~{fmt(downPayment)} — {profile.saved >= downPayment ? "within" : "more than"} your {fmt(profile.saved)} saved.
                                         {" "}Remember to leave room for <GlossaryTerm term="Closing costs">closing costs</GlossaryTerm> (~$5,000-$7,000).

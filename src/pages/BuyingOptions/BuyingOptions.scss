@@ -53,6 +53,11 @@ $amber-700: #ffa000;
     background-color: $amber-50;
     border-left: 3px solid $amber-700;
     padding: 24px;
+
+    &.noWarnings {
+        background-color: $green-50;
+        border-left: 3px solid $green-700;
+    }
 }
 
 .compareDivider__line {
