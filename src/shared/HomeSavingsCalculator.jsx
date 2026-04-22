@@ -1,15 +1,20 @@
 import { useState, useCallback } from "react";
+import { useBuyerProfile } from "./BuyerProfileContext";
 
 function fmt(value) {
   return value.toLocaleString("en-US", { style: "currency", currency: "USD", maximumFractionDigits: 0 });
 }
 
 export default function HomeSavingsCalculator({ onClose, isDraggable = true }) {
-  const [homePrice, setHomePrice] = useState(300000);
-  const [downPercent, setDownPercent] = useState(20);
-  const [pmi, setPmi] = useState(false);
-  const [saved, setSaved] = useState(20000);
-  const [pos, setPos] = useState({ x: window.innerWidth / 2 - 220, y: 100 });
+  // Hook into the shared buyer profile. Every edit flows through updateProfile
+  // so the Financing page sees the same values.
+  const { profile, updateProfile } = useBuyerProfile();
+  const { homePrice, downPercent, pmi, saved, creditScore } = profile;
+
+  const [pos, setPos] = useState({
+    x: typeof window !== "undefined" ? window.innerWidth / 2 - 220 : 100,
+    y: 100,
+  });
 
   const onMouseDown = useCallback((e) => {
     if (!isDraggable) return;
@@ -17,7 +22,10 @@ export default function HomeSavingsCalculator({ onClose, isDraggable = true }) {
     const startX = e.clientX - pos.x;
     const startY = e.clientY - pos.y;
     const onMouseMove = (e) => setPos({ x: e.clientX - startX, y: e.clientY - startY });
-    const onMouseUp = () => { document.removeEventListener("mousemove", onMouseMove); document.removeEventListener("mouseup", onMouseUp); };
+    const onMouseUp = () => {
+      document.removeEventListener("mousemove", onMouseMove);
+      document.removeEventListener("mouseup", onMouseUp);
+    };
     document.addEventListener("mousemove", onMouseMove);
     document.addEventListener("mouseup", onMouseUp);
   }, [pos, isDraggable]);
@@ -33,13 +41,30 @@ export default function HomeSavingsCalculator({ onClose, isDraggable = true }) {
   const barColor = ratio < 0.5 ? "#E5484D" : ratio < 1 ? "#F5A524" : "#22C55E";
 
   return (
-    <div onMouseDown={onMouseDown} style={{ position: isDraggable ? "fixed" : "relative", left: isDraggable ? pos.x : 0, top: isDraggable ? pos.y : 0, zIndex: 1000, cursor: isDraggable ? "grab" : "auto", userSelect: "none" }}>
+    <div
+      onMouseDown={onMouseDown}
+      style={{
+        position: isDraggable ? "fixed" : "relative",
+        left: isDraggable ? pos.x : 0,
+        top: isDraggable ? pos.y : 0,
+        zIndex: 1000,
+        cursor: isDraggable ? "grab" : "auto",
+        userSelect: "none",
+      }}
+    >
       <div style={s.wrapper}>
-        {isDraggable && onClose && <button onClick={onClose} style={s.closeBtn}>✕</button>}
+        {isDraggable && onClose && (
+          <button onClick={onClose} style={s.closeBtn}>✕</button>
+        )}
 
         <div>
           <label style={s.label}>Amount Saved</label>
-          <input type="number" value={saved} onChange={(e) => setSaved(Number(e.target.value))} style={{ ...s.input, marginBottom: 14 }} />
+          <input
+            type="number"
+            value={saved}
+            onChange={(e) => updateProfile({ saved: Number(e.target.value) })}
+            style={{ ...s.input, marginBottom: 14 }}
+          />
           <div style={{ position: "relative" }}>
             <div style={s.barBg}>
               <div style={{ ...s.barFill, width: percent + "%", background: barColor }} />
@@ -51,18 +76,48 @@ export default function HomeSavingsCalculator({ onClose, isDraggable = true }) {
         </div>
 
         <div>
-          <h2 style={{fontFamily: "Roboto",marginBottom: 16 }}>Home Savings Calculator</h2>
+          <h2 style={{ fontFamily: "Roboto", marginBottom: 16 }}>Home Savings Calculator</h2>
 
           <label style={s.label}>House Price</label>
-          <input type="number" value={homePrice} onChange={(e) => setHomePrice(Number(e.target.value))} style={s.input} />
+          <input
+            type="number"
+            value={homePrice}
+            onChange={(e) => updateProfile({ homePrice: Number(e.target.value) })}
+            style={s.input}
+          />
 
           <label style={s.label}>Down Payment %</label>
-          <input type="number" value={downPercent} onChange={(e) => setDownPercent(Number(e.target.value))} style={s.input} />
+          <input
+            type="number"
+            value={downPercent}
+            onChange={(e) => updateProfile({ downPercent: Number(e.target.value) })}
+            style={s.input}
+          />
+
+          <label style={s.label}>Credit Score</label>
+          <input
+            type="number"
+            value={creditScore}
+            onChange={(e) => updateProfile({ creditScore: Number(e.target.value) })}
+            style={s.input}
+          />
 
           <label style={s.label}>PMI Required?</label>
           <div style={{ display: "flex", gap: 16, marginTop: 6 }}>
-            <label><input type="radio" checked={!pmi} onChange={() => setPmi(false)} /> No</label>
-            <label><input type="radio" checked={pmi} onChange={() => setPmi(true)} /> Yes</label>
+            <label>
+              <input
+                type="radio"
+                checked={!pmi}
+                onChange={() => updateProfile({ pmi: false })}
+              /> No
+            </label>
+            <label>
+              <input
+                type="radio"
+                checked={pmi}
+                onChange={() => updateProfile({ pmi: true })}
+              /> Yes
+            </label>
           </div>
 
           <div style={{ marginTop: 16, marginBottom: 12, borderTop: "1px solid #eee" }} />
@@ -74,9 +129,11 @@ export default function HomeSavingsCalculator({ onClose, isDraggable = true }) {
             {pmi && <p>PMI Cushion: {fmt(pmiBuffer)}</p>}
           </div>
 
-          <div style={{fontFamily: "Roboto", marginTop: 16, fontWeight: 600, fontSize: 16 }}>
+          <div style={{ fontFamily: "Roboto", marginTop: 16, fontWeight: 600, fontSize: 16 }}>
             Recommended Savings:
-            <span style={{ display: "block", fontSize: 24, marginTop: 4 }}>{fmt(recommendedSavings)}</span>
+            <span style={{ display: "block", fontSize: 24, marginTop: 4 }}>
+              {fmt(recommendedSavings)}
+            </span>
           </div>
         </div>
       </div>

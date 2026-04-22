@@ -6,6 +6,7 @@ import GettingStarted from "./pages/GettingStarted";
 import BuyingOptions from "./pages/BuyingOptions";
 import HiddenCosts from "./pages/HiddenCosts";
 import Glossary from "./shared/Glossary";
+import { BuyerProfileProvider } from "./shared/BuyerProfileContext";
 import { BrowserRouter, Link, Route, Routes } from "react-router-dom";
 
 const pages = [
@@ -20,33 +21,34 @@ function App() {
     const [currentRoute, setCurrentRoute] = useState(window.location.pathname);
 
     return (
-        <BrowserRouter>
-            <nav className="navigationBar">
-                <Typography
-                    className="navLogo"
-                >
-                    Foundation Labs
-                </Typography>
-                {pages.map((navItem) => (
-                    <Link
-                        className={`navButton ${(currentRoute === navItem.route) ? "active" : ""}`}
-                        onClick={() => setCurrentRoute(navItem.route)}
-                        to={navItem.route}
-                    >
-                        {navItem.name}
-                    </Link>
-                ))}
-                <Glossary />
-            </nav>
-            
-            <Routes>
-                <Route path="/CS422/" element={<Home />} />
-                <Route path="/CS422/GettingStarted" element={<GettingStarted />} />
-                <Route path="/CS422/Financing" element={<BuyingOptions />} />
-                <Route path="/CS422/MethodsOfAcquisition" element={<BuyingOptions />} />
-                <Route path="/CS422/HiddenCosts" element={<HiddenCosts />} />
-            </Routes>
-        </BrowserRouter>
+        <BuyerProfileProvider>
+            <BrowserRouter>
+                <nav className="navigationBar">
+                    <Typography className="navLogo">
+                        Foundation Labs
+                    </Typography>
+                    {pages.map((navItem) => (
+                        <Link
+                            key={navItem.route}
+                            className={`navButton ${(currentRoute === navItem.route) ? "active" : ""}`}
+                            onClick={() => setCurrentRoute(navItem.route)}
+                            to={navItem.route}
+                        >
+                            {navItem.name}
+                        </Link>
+                    ))}
+                    <Glossary />
+                </nav>
+
+                <Routes>
+                    <Route path="/CS422/" element={<Home />} />
+                    <Route path="/CS422/GettingStarted" element={<GettingStarted />} />
+                    <Route path="/CS422/Financing" element={<BuyingOptions />} />
+                    <Route path="/CS422/MethodsOfAcquisition" element={<BuyingOptions />} />
+                    <Route path="/CS422/HiddenCosts" element={<HiddenCosts />} />
+                </Routes>
+            </BrowserRouter>
+        </BuyerProfileProvider>
     );
 }
 
