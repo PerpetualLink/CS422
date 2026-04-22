@@ -15,7 +15,7 @@ function App() {
 
     return (
     <BuyerProfileProvider>
-        <BrowserRouter clasName={"appContainer"}>
+        <BrowserRouter>
             <nav className="navigationBar">
                 <Typography
                     className="navLogo"
