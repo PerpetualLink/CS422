@@ -30,6 +30,7 @@ function App() {
                 {pages.map((navItem) => (
                     <Link
                         className={`navButton ${(currentRoute === navItem.route) ? "active" : ""}`}
+                        key={navItem.name}
                         onClick={() => setCurrentRoute(navItem.route)}
                         to={navItem.route}
                     >
