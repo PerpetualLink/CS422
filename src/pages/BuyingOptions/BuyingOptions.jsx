@@ -1,112 +1,16 @@
 import { useMemo, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { amber, green, grey } from "@mui/material/colors";
-import {
-    Box,
-    Button,
-    Card,
-    CardContent,
-    Collapse,
-    Divider,
-    Stack,
-    Tooltip,
-    Typography,
-} from "@mui/material";
-import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
-import ExpandLessIcon from "@mui/icons-material/ExpandLess";
-import EditIcon from "@mui/icons-material/Edit";
-import CheckCircleOutlineIcon from "@mui/icons-material/CheckCircleOutline";
-import WarningAmberIcon from "@mui/icons-material/WarningAmber";
-import AccountBalanceWalletIcon from "@mui/icons-material/AccountBalanceWallet";
-import HomeIcon from "@mui/icons-material/Home";
-import TrendingFlatIcon from "@mui/icons-material/TrendingFlat";
+import { Box, Button, Card, CardContent, Collapse, Divider, Stack, Tooltip, Typography} from "@mui/material";
+import { AccountBalanceWallet, CheckCircleOutline, Edit, ExpandMore, ExpandLess, Home, TrendingFlat, WarningAmber } from "@mui/icons-material";
 import { useBuyerProfile } from "../../shared/BuyerProfileContext";
 import ComparisonTable from "./ComparisonTable";
-import {
-    fmt,
-    glossary,
-    methodColumns,
-    methodMeta,
-    methodRows,
-    pathColumns,
-    pathRows,
-    computeRecommendation,
-    computePathRecommendation,
-} from "./recommendationEngine";
-import "./BuyingOptions.scss";
+import { fmt, methodColumns, methodMeta, methodRows, pathColumns, pathRows, computeRecommendation, computePathRecommendation } from "./recommendationEngine";
 import GlossaryTerm from "./GlossaryTerm";
-
-function ReasonCard({ icon, label, title, body }) {
-    return (
-        <Card variant="outlined" className="reasonCard">
-            <CardContent>
-                <Stack direction="row" spacing={1} alignItems="center" sx={{ mb: 1 }}>
-                    {icon}
-                    <Typography variant="caption" className="reasonCard__label">
-                        {label}
-                    </Typography>
-                </Stack>
-                <Typography variant="h5" sx={{ fontWeight: 700, mb: 1 }}>
-                    {title}
-                </Typography>
-                <Typography variant="body2" sx={{ color: grey[700], lineHeight: 1.6 }}>
-                    {body}
-                </Typography>
-            </CardContent>
-        </Card>
-    );
-}
-
-function ProfileSummary({ profile, updateProfile, editing, setEditing }) {
-    if (editing) {
-        const fields = [
-            { key: "saved", label: "Saved: $", width: 100 },
-            { key: "creditScore", label: "Credit:", width: 70 },
-            { key: "homePrice", label: "Target: $", width: 110 },
-        ];
-        return (
-            <Stack direction="row" spacing={2} alignItems="center" flexWrap="wrap">
-                {fields.map((f) => (
-                    <label key={f.key} style={{ fontSize: 14 }}>
-                        {f.label}
-                        <input
-                            type="number"
-                            value={profile[f.key]}
-                            onChange={(e) => updateProfile({ [f.key]: Number(e.target.value) })}
-                            style={{ width: f.width, marginLeft: 4, padding: "2px 6px" }}
-                        />
-                    </label>
-                ))}
-                <Button size="small" onClick={() => setEditing(false)} sx={{ color: green[800], fontWeight: 600 }}>
-                    Done
-                </Button>
-            </Stack>
-        );
-    }
-    return (
-        <Stack direction="row" spacing={2} alignItems="center" flexWrap="wrap">
-            <Typography variant="body2"><strong>{fmt(profile.saved)}</strong> saved</Typography>
-            <Box sx={{ color: grey[400] }}>•</Box>
-            <Typography variant="body2">Credit <strong>{profile.creditScore}</strong></Typography>
-            <Box sx={{ color: grey[400] }}>•</Box>
-            <Typography variant="body2">Target <strong>{fmt(profile.homePrice)}</strong></Typography>
-        </Stack>
-    );
-}
-
-function NumberStat({ label, value, valueColor, caption }) {
-    return (
-        <Box sx={{ flex: 1 }}>
-            <Typography variant="caption" className="numberStat__label">
-                {label}
-            </Typography>
-            <Typography variant="h5" sx={{ fontWeight: 700, mt: 0.5, color: valueColor ?? "inherit" }}>
-                {value}
-            </Typography>
-            {caption}
-        </Box>
-    );
-}
+import NumberStat from "./NumberStat";
+import ProfileSummary from "./ProfileSummary";
+import Reason from "./Reason";
+import "./BuyingOptions.scss";
 
 function BuyingOptions() {
     const navigate = useNavigate();
@@ -121,13 +25,14 @@ function BuyingOptions() {
     const downPayment = profile.homePrice * 0.035;
     const estMonthly = Math.round(profile.homePrice * 0.965 * 0.0065 + profile.homePrice * 0.001);
     const method = methodMeta[recommendation.method];
+    
+    const typographyStling = {
+        fontSize: "1rem"
+    }
 
     return (
         <Box className="financingContainer">
             <Box sx={{ mb: 5 }}>
-                <Typography variant="overline" className="financingContainer__eyebrow">
-                    Financing
-                </Typography>
                 <Typography variant="h3" sx={{ fontWeight: 700, color: grey[900], lineHeight: 1.15, mb: 1.5 }}>
                     How will you pay for it?
                 </Typography>
@@ -138,9 +43,9 @@ function BuyingOptions() {
             </Box>
 
             <Card elevation={3} className="recommendationCard">
-                <Box className="recommendationCard__profileBar">
-                    <Stack direction="row" spacing={2} alignItems="center" flexWrap="wrap">
-                        <Typography variant="caption" className="recommendationCard__eyebrow">
+                <Box className="profileBar">
+                    <Stack direction="row" spacing={2} alignItems="center" flexWrap="wrap" sx={{ flexGrow: 1 }}>
+                        <Typography variant="caption" className="eyebrow">
                             Based on what you told us
                         </Typography>
                         <Box sx={{ color: grey[400] }}>•</Box>
@@ -154,7 +59,7 @@ function BuyingOptions() {
                     {!editingProfile && (
                         <Button
                             size="small"
-                            startIcon={<EditIcon fontSize="small" />}
+                            startIcon={<Edit fontSize="small" />}
                             onClick={() => setEditingProfile(true)}
                             sx={{ color: green[800], fontWeight: 600 }}
                         >
@@ -164,7 +69,7 @@ function BuyingOptions() {
                 </Box>
 
                 <CardContent sx={{ p: 5 }}>
-                    <Typography variant="overline" sx={{ color: grey[600], fontWeight: 600, letterSpacing: 2 }}>
+                    <Typography variant="overline" sx={{ color: grey[600], fontSize: "1rem", fontWeight: 600, letterSpacing: 2 }}>
                         Our recommendation
                     </Typography>
                     <Typography variant="h4" sx={{ fontWeight: 700, color: grey[900], mt: 1, mb: 3, lineHeight: 1.2 }}>
@@ -173,14 +78,14 @@ function BuyingOptions() {
                     </Typography>
 
                     <Stack direction={{ xs: "column", md: "row" }} spacing={3} sx={{ mb: 4 }}>
-                        <ReasonCard
-                            icon={<AccountBalanceWalletIcon fontSize="small" sx={{ color: green[700] }} />}
+                        <Reason
+                            icon={<AccountBalanceWallet fontSize="small" sx={{ color: green[700] }} />}
                             label="Financing Method"
                             title={method.label}
                             body={recommendation.reason}
                         />
-                        <ReasonCard
-                            icon={<HomeIcon fontSize="small" sx={{ color: green[700] }} />}
+                        <Reason
+                            icon={<Home fontSize="small" sx={{ color: green[700] }} />}
                             label="Acquisition Path"
                             title={pathRec.path}
                             body={pathRec.reason}
@@ -188,7 +93,7 @@ function BuyingOptions() {
                     </Stack>
 
                     <Box sx={{ borderTop: `1px solid ${grey[200]}`, pt: 3 }}>
-                        <Typography variant="overline" sx={{ color: grey[600], fontWeight: 600, letterSpacing: 2, mb: 2, display: "block" }}>
+                        <Typography variant="overline" sx={{ color: grey[600], fontSize: "1rem", fontWeight: 600, letterSpacing: 2, mb: 2, display: "block" }}>
                             What this looks like for you
                         </Typography>
                         <Stack direction={{ xs: "column", sm: "row" }} spacing={3} divider={<Divider orientation="vertical" flexItem />}>
@@ -205,12 +110,12 @@ function BuyingOptions() {
                                     <Stack direction="row" spacing={0.5} alignItems="center">
                                         {profile.saved >= downPayment ? (
                                             <>
-                                                <CheckCircleOutlineIcon fontSize="inherit" sx={{ color: green[700] }} />
+                                                <CheckCircleOutline fontSize="inherit" sx={{ color: green[700] }} />
                                                 <Typography variant="caption" sx={{ color: green[700] }}>Enough for down payment</Typography>
                                             </>
                                         ) : (
                                             <>
-                                                <WarningAmberIcon fontSize="inherit" sx={{ color: amber[800] }} />
+                                                <WarningAmber fontSize="inherit" sx={{ color: amber[800] }} />
                                                 <Typography variant="caption" sx={{ color: amber[800] }}>{fmt(downPayment - profile.saved)} short</Typography>
                                             </>
                                         )}
@@ -232,7 +137,7 @@ function BuyingOptions() {
 
                     <Button
                         onClick={() => setShowWhy(!showWhy)}
-                        startIcon={showWhy ? <ExpandLessIcon /> : <ExpandMoreIcon />}
+                        startIcon={showWhy ? <ExpandLess /> : <ExpandMore />}
                         sx={{ mt: 3, color: green[800], fontWeight: 600, textTransform: "none" }}
                     >
                         Why we recommended this
@@ -241,7 +146,7 @@ function BuyingOptions() {
                         <Box className="reasoningPanel">
                             <Stack spacing={1.5}>
                                 <Stack direction="row" spacing={1.5} alignItems="flex-start">
-                                    <CheckCircleOutlineIcon fontSize="small" sx={{ color: green[700], mt: 0.25, flexShrink: 0 }} />
+                                    <CheckCircleOutline fontSize="small" sx={{ color: green[700], mt: 0.25, flexShrink: 0 }} />
                                     <Typography variant="body2" sx={{ color: grey[800], lineHeight: 1.6 }}>
                                         Your credit score of <strong>{profile.creditScore}</strong>
                                         {profile.creditScore < 620
@@ -250,7 +155,7 @@ function BuyingOptions() {
                                     </Typography>
                                 </Stack>
                                 <Stack direction="row" spacing={1.5} alignItems="flex-start">
-                                    <CheckCircleOutlineIcon fontSize="small" sx={{ color: green[700], mt: 0.25, flexShrink: 0 }} />
+                                    <CheckCircleOutline fontSize="small" sx={{ color: green[700], mt: 0.25, flexShrink: 0 }} />
                                     <Typography variant="body2" sx={{ color: grey[800], lineHeight: 1.6 }}>
                                         At 3.5% down, you'd need ~{fmt(downPayment)} — {profile.saved >= downPayment ? "within" : "more than"} your {fmt(profile.saved)} saved.
                                         {" "}Remember to leave room for <GlossaryTerm term="Closing costs">closing costs</GlossaryTerm> (~$5,000-$7,000).
@@ -258,7 +163,7 @@ function BuyingOptions() {
                                 </Stack>
                                 {recommendation.method === "FHA" && (
                                     <Stack direction="row" spacing={1.5} alignItems="flex-start">
-                                        <WarningAmberIcon fontSize="small" sx={{ color: amber[700], mt: 0.25, flexShrink: 0 }} />
+                                        <WarningAmber fontSize="small" sx={{ color: amber[700], mt: 0.25, flexShrink: 0 }} />
                                         <Typography variant="body2" sx={{ color: grey[800], lineHeight: 1.6 }}>
                                             FHA requires <GlossaryTerm term="PMI" /> for the life of the loan. Once you have ~20% equity, you can refinance into a conventional loan to drop it.
                                         </Typography>
@@ -284,7 +189,7 @@ function BuyingOptions() {
 
             <Button
                 onClick={() => setShowFullComparison(!showFullComparison)}
-                startIcon={showFullComparison ? <ExpandLessIcon /> : <ExpandMoreIcon />}
+                startIcon={showFullComparison ? <ExpandLess /> : <ExpandMore />}
                 sx={{ mb: 4, color: green[800], fontWeight: 600, textTransform: "none" }}
             >
                 {showFullComparison ? "Hide" : "Show"} full comparison tables
@@ -322,7 +227,7 @@ function BuyingOptions() {
                 <Button
                     variant="contained"
                     size="large"
-                    endIcon={<TrendingFlatIcon />}
+                    endIcon={<TrendingFlat />}
                     onClick={() => navigate("/CS422/HiddenCosts")}
                     className="nextStepCard__cta"
                 >

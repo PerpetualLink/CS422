@@ -1,0 +1,16 @@
+$green-700: #2e7d32;
+$green-800: #1b5e20;
+$grey-50: #fafafa;
+
+.reason {
+    flex: 1;
+    border-left: 3px solid $green-700 !important;
+    background-color: $grey-50 !important;
+
+    .label {
+        color: $green-800;
+        font-weight: 700;
+        letter-spacing: 1px;
+        text-transform: uppercase;
+    }
+}

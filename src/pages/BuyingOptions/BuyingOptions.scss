@@ -5,15 +5,12 @@ $green-50: #e8f5e9;
 $green-200: #a5d6a7;
 $green-800: #1b5e20;
 $green-900: #1b4d20;
-$grey-50: #fafafa;
 $grey-200: #eeeeee;
 $grey-300: #e0e0e0;
-$grey-600: #757575;
 $amber-50: #fff8e1;
 $amber-700: #ffa000;
 
 .financingContainer {
-    font-family: "roboto";
     max-width: 1200px;
     margin: 0 auto;
     padding: 32px 24px;
@@ -31,7 +28,7 @@ $amber-700: #ffa000;
     border-radius: 8px !important;
     overflow: hidden;
 
-    &__profileBar {
+    .profileBar {
         background-color: $green-50;
         border-bottom: 1px solid $green-200;
         padding: 16px 32px;
@@ -42,31 +39,13 @@ $amber-700: #ffa000;
         gap: 16px;
     }
 
-    &__eyebrow {
+    .eyebrow {
         color: $green-900;
+        font-size: .85rem;
         font-weight: 700;
         letter-spacing: 1px;
         text-transform: uppercase;
     }
-}
-
-.reasonCard {
-    flex: 1;
-    border-left: 3px solid $green-700 !important;
-    background-color: $grey-50 !important;
-
-    &__label {
-        color: $green-800;
-        font-weight: 700;
-        letter-spacing: 1px;
-        text-transform: uppercase;
-    }
-}
-
-.numberStat__label {
-    color: $grey-600;
-    letter-spacing: 1px;
-    text-transform: uppercase;
 }
 
 .reasoningPanel {
