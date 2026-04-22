@@ -1,5 +1,9 @@
 export const keywords = [
     {
+        TERM: "Appraisal",
+        DEFINITION: "A professional estimation of the home's market value, often ordered by the lender to ensure the home is worth the loan amount."
+    },
+    {
         TERM: "Cash Purchase",
         DEFINITION: "A cash purchase means buying a home without taking out a mortgage, paying the full purchase price upfront."
     },
@@ -12,8 +16,20 @@ export const keywords = [
         DEFINITION: "A condition that must be met for a real estate contract to become legally binding. Common contingencies include the home passing inspection, the buyer securing financing, and the appraisal meeting the purchase price."
     },
     {
-        TERM: "Conventional",
+        TERM: "Conventional Mortgage",
         DEFINITION: "A standard mortgage not backed by the government. Requires better credit than FHA but offers more flexibility."
+    },
+    {
+        TERM: "Debt-to-Income Ratio (DTI)",
+        DEFINITION: "A formula lenders use to compare your monthly debt payments to your monthly income, often required to be below 43%."
+    },
+    {
+        TERM: "Earnest Money",
+        DEFINITION: "Often called a \"good faith deposit,\" is an upfront payment made by a buyer to a seller when making an offer on a home to prove they are serious about the purchase. It typically amounts to 1%–3% of the sale price, is held in an escrow account, and is used as security for the seller while taking the home off the market."
+    },
+    {
+        TERM: "Escrow",
+        DEFINITION: "A neutral third party holding money or assets (like a house deed) during a transaction to ensure both sides fulfill their promises before the deal closes. It protects buyers and sellers by holding funds until conditions, such as inspections or financing, are met."
     },
     {
         TERM: "FHA Loan",
@@ -34,9 +50,5 @@ export const keywords = [
     {
         TERM: "Tax Auction",
         DEFINITION: "A public sale where properties are sold by a government entity because the owner failed to pay property taxes. Investors or buyers can bid on these properties, sometimes at significantly reduced prices."
-    },
-    {
-        TERM: "Traditional Mortgage",
-        DEFINITION: "A home loan issued by a bank, credit union, or mortgage lender that is not backed by the government. Borrowers typically qualify based on their credit score, income, debt-to-income ratio, and down payment."
-    },
+    }
 ]

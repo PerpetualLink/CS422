@@ -73,7 +73,7 @@ function BuyingOptions() {
                         Our recommendation
                     </Typography>
                     <Typography variant="h4" sx={{ fontWeight: 700, color: grey[900], mt: 1, mb: 3, lineHeight: 1.2 }}>
-                        Start with an <GlossaryTerm term="FHA">{method.label}</GlossaryTerm>
+                        Start with an <GlossaryTerm term={method.label}>{method.label}</GlossaryTerm>
                         {" · "}work with a {pathRec.path.toLowerCase()}
                     </Typography>
 

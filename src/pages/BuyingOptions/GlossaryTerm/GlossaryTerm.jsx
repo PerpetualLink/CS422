@@ -8,6 +8,10 @@ import { useBuyerProfile } from "../../../shared/BuyerProfileContext";
 function GlossaryTerm({ term, children }) {
     const { updateProfile } = useBuyerProfile();
 
+    if (term.includes("Loan")) {
+        term = term.split(" Loan")[0]
+    };
+
     return (
         <Tooltip
             title={
