@@ -195,6 +195,7 @@ function BuyingOptions() {
             <Typography variant="body2" sx={{ color: grey[600], mb: 3, fontSize: "1rem" }}>
                 Want to see the full picture? Here's how every financing method and acquisition path compares. Your recommended options are highlighted.
             </Typography>
+
                 <ComparisonTable
                     title="Financing Methods"
                     description="How you'll actually pay for the home."

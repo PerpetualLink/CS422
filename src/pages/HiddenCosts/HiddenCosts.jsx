@@ -125,11 +125,11 @@ function HiddenCosts() {
                     gridTemplateColumns: "2fr 3fr 2fr", 
                     gap: 2, 
                     p: 2, 
-                    bgcolor: "#43A047", 
+                    bgcolor: "#66BB6A", 
                     color: "white", 
                     fontWeight: "bold",
                     borderRadius: "8px 8px 0 0",
-                    borderBottom: "2px solid #2e7d32"
+                    borderBottom: "2px solid #43A047"
                 }}>
                     <Typography sx={{ fontWeight: "bold" }}>Cost Type</Typography>
                     <Typography sx={{ fontWeight: "bold" }}>Description</Typography>
@@ -146,6 +146,7 @@ function HiddenCosts() {
                             borderTop: index === 0 ? "none" : "1px solid #e0e0e0",
                             '&:before': { display: 'none' }
                         }}
+                        disableGutters={true}
                     >
                         <AccordionSummary
                             expandIcon={<ExpandMoreIcon />}
@@ -191,31 +192,6 @@ function HiddenCosts() {
 
     return (
         <Box sx={{ padding: "20px", maxWidth: "1200px", margin: "0 auto" }}>
-            {/* Definition Section */}
-            <Box sx={{ 
-                mb: 4, 
-                p: 3, 
-                backgroundColor: "#e8f5e9", 
-                borderRadius: 2,
-                borderLeft: "4px solid #43A047"
-            }}>
-                <Typography variant="subtitle1" sx={{ 
-                    fontWeight: "bold", 
-                    color: "#43A047", 
-                    mb: 1,
-                    textTransform: "uppercase",
-                    letterSpacing: "1px"
-                }}>
-                    What are Hidden Costs?
-                </Typography>
-                <Typography variant="body1" sx={{ 
-                    color: "#333", 
-                    lineHeight: 1.6 
-                }}>
-                    Hidden costs are expenses that aren't included in the purchase price of a home but are required to complete the transaction or maintain the property. These can include closing costs, inspection fees, insurance, property taxes, and unexpected repairs. Being aware of these costs helps you budget more accurately and avoid financial surprises during your home buying journey.
-                </Typography>
-            </Box>
-
             {/* All Three Tables */}
             <CostTable title={costData.mostCommon.title} items={costData.mostCommon.items} />
             <CostTable title={costData.common.title} items={costData.common.items} />
