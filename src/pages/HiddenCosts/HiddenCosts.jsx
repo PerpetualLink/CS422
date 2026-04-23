@@ -125,11 +125,11 @@ function HiddenCosts() {
                     gridTemplateColumns: "2fr 3fr 2fr", 
                     gap: 2, 
                     p: 2, 
-                    bgcolor: "#43A047", 
+                    bgcolor: "#66BB6A", 
                     color: "white", 
                     fontWeight: "bold",
                     borderRadius: "8px 8px 0 0",
-                    borderBottom: "2px solid #2e7d32"
+                    borderBottom: "2px solid #43A047"
                 }}>
                     <Typography sx={{ fontWeight: "bold" }}>Cost Type</Typography>
                     <Typography sx={{ fontWeight: "bold" }}>Description</Typography>
@@ -146,6 +146,7 @@ function HiddenCosts() {
                             borderTop: index === 0 ? "none" : "1px solid #e0e0e0",
                             '&:before': { display: 'none' }
                         }}
+                        disableGutters={true}
                     >
                         <AccordionSummary
                             expandIcon={<ExpandMoreIcon />}
