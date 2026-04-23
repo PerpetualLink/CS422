@@ -10,6 +10,7 @@ import GlossaryTerm from "./GlossaryTerm";
 import NumberStat from "./NumberStat";
 import ProfileSummary from "./ProfileSummary";
 import Reason from "./Reason";
+import HiddenCosts from "../HiddenCosts";
 import "./BuyingOptions.scss";
 
 function BuyingOptions() {
@@ -221,28 +222,7 @@ function BuyingOptions() {
                 />
             </Collapse>
 
-            <Card variant="outlined" className="nextStepCard">
-                <CardContent>
-                    <Typography variant="overline" sx={{ color: grey[600], letterSpacing: 2, fontWeight: 600 }}>
-                        Next step
-                    </Typography>
-                    <Typography variant="h5" sx={{ fontWeight: 700 }}>
-                        Understand the hidden costs
-                    </Typography>
-                    <Typography variant="body2" sx={{ color: grey[600], mt: 0.5 }}>
-                        Closing costs, PMI, inspections, and escrow — what your down payment doesn't cover.
-                    </Typography>
-                </CardContent>
-                <Button
-                    variant="contained"
-                    size="large"
-                    endIcon={<TrendingFlat />}
-                    onClick={() => navigate("/CS422/HiddenCosts")}
-                    className="nextStepCard__cta"
-                >
-                    Continue
-                </Button>
-            </Card>
+            <HiddenCosts />
         </Box>
     );
 }
