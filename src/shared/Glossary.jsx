@@ -15,7 +15,7 @@ function Glossary() {
 
     useEffect(() => {
         if (searchWord) {
-            const newWordList = keywords.filter((word) => word.TERM.includes(searchWord));
+            const newWordList = keywords.filter((word) => word.TERM.toLowerCase().includes(searchWord.toLowerCase()));
 
             if (newWordList.length > 0) {
                 setWordList(newWordList);

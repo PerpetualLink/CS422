@@ -44,7 +44,7 @@ function BuyingOptions() {
 
             <Card elevation={3} className="recommendationCard">
                 <Box className="profileBar">
-                    <Stack direction="row" spacing={2} alignItems="center" flexWrap="wrap" sx={{ flexGrow: 1 }}>
+                    <Stack direction="row" spacing={2} alignItems="center" flexWrap="wrap" sx={{ display: "flex", flexGrow: 1 }}>
                         <Typography variant="caption" className="eyebrow">
                             Based on what you told us
                         </Typography>
@@ -186,13 +186,13 @@ function BuyingOptions() {
 
             <Stack direction="row" alignItems="center" spacing={2} sx={{ mb: 3 }}>
                 <Box className="compareDivider__line" />
-                <Typography variant="overline" sx={{ color: grey[600], letterSpacing: 2, fontWeight: 600 }}>
+                <Typography variant="overline" sx={{ color: grey[600], letterSpacing: 2, fontWeight: 600, fontSize: "1rem" }}>
                     Compare all options
                 </Typography>
                 <Box className="compareDivider__line" />
             </Stack>
 
-            <Typography variant="body2" sx={{ color: grey[600], mb: 3, maxWidth: 720 }}>
+            <Typography variant="body2" sx={{ color: grey[600], mb: 3, fontSize: "1rem" }}>
                 Want to see the full picture? Here's how every financing method and acquisition path compares. Your recommended options are highlighted.
             </Typography>
 
