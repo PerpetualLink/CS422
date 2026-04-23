@@ -15,7 +15,6 @@ import "./BuyingOptions.scss";
 function BuyingOptions() {
     const navigate = useNavigate();
     const { profile, updateProfile } = useBuyerProfile();
-    const [showFullComparison, setShowFullComparison] = useState(false);
     const [showWhy, setShowWhy] = useState(true);
     const [editingProfile, setEditingProfile] = useState(false);
 
@@ -191,20 +190,6 @@ function BuyingOptions() {
                 </Typography>
                 <Box className="compareDivider__line" />
             </Stack>
-
-            <Typography variant="body2" sx={{ color: grey[600], mb: 3, maxWidth: 720 }}>
-                Want to see the full picture? Here's how every financing method and acquisition path compares. Your recommended options are highlighted.
-            </Typography>
-
-            <Button
-                onClick={() => setShowFullComparison(!showFullComparison)}
-                startIcon={showFullComparison ? <ExpandLess /> : <ExpandMore />}
-                sx={{ mb: 4, color: green[800], fontWeight: 600, textTransform: "none" }}
-            >
-                {showFullComparison ? "Hide" : "Show"} full comparison tables
-            </Button>
-
-            <Collapse in={showFullComparison}>
                 <ComparisonTable
                     title="Financing Methods"
                     description="How you'll actually pay for the home."
@@ -219,8 +204,6 @@ function BuyingOptions() {
                     rows={pathRows}
                     recommended={pathRec.path}
                 />
-            </Collapse>
-
             <Card variant="outlined" className="nextStepCard">
                 <CardContent>
                     <Typography variant="overline" sx={{ color: grey[600], letterSpacing: 2, fontWeight: 600 }}>
