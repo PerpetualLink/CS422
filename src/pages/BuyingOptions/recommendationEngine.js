@@ -8,7 +8,7 @@ export function fmt(value) {
 
 export const methodMeta = {
     FHA: { label: "FHA Loan", timeToClose: "45-60 days" },
-    Traditional: { label: "Conventional Loan", timeToClose: "30-45 days" },
+    Traditional: { label: "Conventional Mortgage", timeToClose: "30-45 days" },
     Cash: { label: "Cash Purchase", timeToClose: "7-14 days" },
 };
 
@@ -30,7 +30,7 @@ export function computeRecommendation(profile) {
         return {
             method: "FHA",
             confidence: "strong",
-            reason: `Your credit score of ${creditScore} is below the typical 620 threshold for conventional loans, but qualifies for FHA. You'd need about ${fmt(fhaDown)} down.`,
+            reason: `Your credit score of ${creditScore} is below the typical 620 threshold for conventional mortgage loans, but qualifies for FHA. You'd need about ${fmt(fhaDown)} down.`,
         };
     }
 
@@ -38,7 +38,7 @@ export function computeRecommendation(profile) {
         return {
             method: "FHA",
             confidence: "strong",
-            reason: `Your credit qualifies for conventional, but FHA's 3.5% down (~${fmt(fhaDown)}) is more achievable than a comfortable 10% conventional down payment (~${fmt(conventionalComfortable)}).`,
+            reason: `Your credit qualifies for conventional mortgage, but FHA's 3.5% down (~${fmt(fhaDown)}) is more achievable than a comfortable 10% conventional down payment (~${fmt(conventionalComfortable)}).`,
         };
     }
 
@@ -46,7 +46,7 @@ export function computeRecommendation(profile) {
         return {
             method: "Traditional",
             confidence: "strong",
-            reason: `With a ${creditScore} credit score and ${fmt(saved)} saved, you qualify for a conventional loan and can put down enough to minimize (or avoid) PMI.`,
+            reason: `With a ${creditScore} credit score and ${fmt(saved)} saved, you qualify for a conventional mortgage loan and can put down enough to minimize (or avoid) PMI.`,
         };
     }
 
@@ -159,10 +159,3 @@ export const pathRows = [
         },
     },
 ];
-
-export const glossary = {
-    FHA: "Federal Housing Administration loan. Government-backed mortgage with lower down payment and credit score requirements, designed for first-time buyers.",
-    PMI: "Private Mortgage Insurance. Extra monthly cost required when you put less than 20% down on a conventional loan. Protects the lender, not you.",
-    Conventional: "A standard mortgage not backed by the government. Requires better credit than FHA but offers more flexibility.",
-    "Closing costs": "Fees paid at the end of the home purchase. Typically 2-5% of the home price, covering title insurance, appraisal, attorney fees, and more.",
-};

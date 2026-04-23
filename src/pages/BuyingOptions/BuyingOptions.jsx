@@ -10,6 +10,7 @@ import GlossaryTerm from "./GlossaryTerm";
 import NumberStat from "./NumberStat";
 import ProfileSummary from "./ProfileSummary";
 import Reason from "./Reason";
+import HiddenCosts from "../HiddenCosts";
 import "./BuyingOptions.scss";
 
 function BuyingOptions() {
@@ -43,7 +44,7 @@ function BuyingOptions() {
 
             <Card elevation={3} className="recommendationCard">
                 <Box className="profileBar">
-                    <Stack direction="row" spacing={2} alignItems="center" flexWrap="wrap" sx={{ flexGrow: 1 }}>
+                    <Stack direction="row" spacing={2} alignItems="center" flexWrap="wrap" sx={{ display: "flex", flexGrow: 1 }}>
                         <Typography variant="caption" className="eyebrow">
                             Based on what you told us
                         </Typography>
@@ -185,11 +186,15 @@ function BuyingOptions() {
 
             <Stack direction="row" alignItems="center" spacing={2} sx={{ mb: 3 }}>
                 <Box className="compareDivider__line" />
-                <Typography variant="overline" sx={{ color: grey[600], letterSpacing: 2, fontWeight: 600 }}>
+                <Typography variant="overline" sx={{ color: grey[600], letterSpacing: 2, fontWeight: 600, fontSize: "1rem" }}>
                     Compare all options
                 </Typography>
                 <Box className="compareDivider__line" />
             </Stack>
+
+            <Typography variant="body2" sx={{ color: grey[600], mb: 3, fontSize: "1rem" }}>
+                Want to see the full picture? Here's how every financing method and acquisition path compares. Your recommended options are highlighted.
+            </Typography>
                 <ComparisonTable
                     title="Financing Methods"
                     description="How you'll actually pay for the home."
@@ -204,28 +209,9 @@ function BuyingOptions() {
                     rows={pathRows}
                     recommended={pathRec.path}
                 />
-            <Card variant="outlined" className="nextStepCard">
-                <CardContent>
-                    <Typography variant="overline" sx={{ color: grey[600], letterSpacing: 2, fontWeight: 600 }}>
-                        Next step
-                    </Typography>
-                    <Typography variant="h5" sx={{ fontWeight: 700 }}>
-                        Understand the hidden costs
-                    </Typography>
-                    <Typography variant="body2" sx={{ color: grey[600], mt: 0.5 }}>
-                        Closing costs, PMI, inspections, and escrow — what your down payment doesn't cover.
-                    </Typography>
-                </CardContent>
-                <Button
-                    variant="contained"
-                    size="large"
-                    endIcon={<TrendingFlat />}
-                    onClick={() => navigate("/CS422/HiddenCosts")}
-                    className="nextStepCard__cta"
-                >
-                    Continue
-                </Button>
-            </Card>
+
+
+            <HiddenCosts />
         </Box>
     );
 }
