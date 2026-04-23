@@ -14,7 +14,7 @@ function ProfileSummary({ profile, updateProfile, editing, setEditing }) {
             { key: "homePrice", label: "Target: $", width: 110 },
         ];
         return (
-            <Stack direction="row" spacing={2} alignItems="center" flexWrap="wrap">
+            <Stack direction="row" spacing={2} alignItems="center" flexWrap="wrap" sx={{ flexGrow: 1 }}>
                 {fields.map((f) => (
                     <label key={f.key} style={{ display: "flex", fontSize: "1rem" }}>
                         <div style={{ alignContent: "center"}}>
