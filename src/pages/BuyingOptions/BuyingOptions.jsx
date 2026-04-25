@@ -100,7 +100,10 @@ function BuyingOptions() {
                             <NumberStat
                                 label="Down payment"
                                 value={fmt(downPayment)}
-                                caption={<Typography variant="caption" sx={{ color: grey[600] }}>3.5% of target price</Typography>}
+                                altValue={fmt(20000)} // TODO Fix with user inputed down payment and percentage
+                                caption={<Typography variant="caption" sx={{ color: grey[600], flexGrow: 1 }}>3.5% of target price </Typography>}
+                                altCaption={<Typography variant="caption" sx={{ color: grey[600], flexGrow: 1 }}>{`${20}% of target price`}</Typography>}
+                                toggle={true}
                             />
                             <NumberStat
                                 label="You have"

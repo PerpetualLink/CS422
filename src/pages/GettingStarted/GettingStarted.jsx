@@ -59,12 +59,19 @@ const steps = [
   },
   {
     label: 'Can You Afford It?',
-    description: `Houses are expensive. The true cost goes well beyond the $200k–$500k "sticker price." You must account for hidden fees that many first-time buyers overlook.
-    The Hidden Costs:
-    Closing Costs: Usually 2–5% of the home price.
-    Earnest Money: A "good faith" deposit to secure the contract.
-    Inspection Fees: Upfront costs to ensure the home is safe.
-    Maintenance Fund: Savings for unexpected roof or HVAC repairs.`,
+    description: `Houses are expensive and the total
+    cost of purchasing a home goes well beyond the inital sticker price
+    of 200k, 400k, etc. On the right we have a wizard that will walk 
+    through the required pieces of info that we recommend you have in mind
+    before you begin your home buying journey. The calculator aims to provide
+    you with a rough estimate for the amount you should aspire to have
+    saved and expect to need for buying a home matching those parameters.
+    Keep in mind this amount is just a recommendation based on the assumption
+    of the down payment percent you provided and 3% closing cost fees or any 
+    other fees that you decide to add. For a more detailed breakdown as to 
+    what kind of monthly payment you should expect, and potential
+    loans to consider based on the information provided see the Financing
+    page.`,
     icon: <AssignmentIcon style={{ color: '#2e7d32' }} />,
   },
 

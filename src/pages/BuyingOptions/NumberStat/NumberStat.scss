@@ -4,4 +4,8 @@ $grey-600: #757575;
     color: $grey-600;
     letter-spacing: 1px;
     text-transform: uppercase;
+
+    &.toggle:hover {
+        background-color: rgba(0,0,0,0.08);
+    }
 }

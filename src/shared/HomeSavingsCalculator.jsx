@@ -5,6 +5,18 @@ function fmt(value) {
   return value.toLocaleString("en-US", { style: "currency", currency: "USD", maximumFractionDigits: 0 });
 }
 
+const s = {
+  wrapper: { position: "relative", display: "flex", flexDirection: "column", gap: 16, padding: 16, borderRadius: 14, background: "#fff", boxShadow: "0 8px 32px rgba(0,0,0,0.18)", fontFamily: "Inter", maxWidth: 440 },
+  closeBtn: { position: "absolute", top: 8, right: 8, background: "none", border: "none", fontSize: 18, cursor: "pointer", color: "#666", zIndex: 1 },
+  label: { fontSize: 14, marginTop: 10 },
+  input: { width: "100%", padding: 8, marginTop: 4, borderRadius: 6, border: "1px solid #ccc", boxSizing: "border-box" },
+  barBg: { height: 18, borderRadius: 20, background: "#E5E7EB", position: "relative", overflow: "hidden" },
+  barFill: { height: "100%", borderRadius: 20, transition: "width 0.4s ease" },
+  targetMarker: { position: "absolute", top: -6, width: 3, height: 30, background: "#111" },
+  labels: { display: "flex", justifyContent: "space-between", fontSize: 12, marginTop: 6 },
+  targetLabel: { textAlign: "center", fontSize: 13, marginTop: 6 },
+};
+
 export default function HomeSavingsCalculator({ onClose, isDraggable = true }) {
   // Hook into the shared buyer profile. Every edit flows through updateProfile
   // so the Financing page sees the same values.
@@ -140,15 +152,3 @@ export default function HomeSavingsCalculator({ onClose, isDraggable = true }) {
     </div>
   );
 }
-
-const s = {
-  wrapper: { position: "relative", display: "flex", flexDirection: "column", gap: 16, padding: 16, borderRadius: 14, background: "#fff", boxShadow: "0 8px 32px rgba(0,0,0,0.18)", fontFamily: "Inter", maxWidth: 440 },
-  closeBtn: { position: "absolute", top: 8, right: 8, background: "none", border: "none", fontSize: 18, cursor: "pointer", color: "#666", zIndex: 1 },
-  label: { fontSize: 14, marginTop: 10 },
-  input: { width: "100%", padding: 8, marginTop: 4, borderRadius: 6, border: "1px solid #ccc", boxSizing: "border-box" },
-  barBg: { height: 18, borderRadius: 20, background: "#E5E7EB", position: "relative", overflow: "hidden" },
-  barFill: { height: "100%", borderRadius: 20, transition: "width 0.4s ease" },
-  targetMarker: { position: "absolute", top: -6, width: 3, height: 30, background: "#111" },
-  labels: { display: "flex", justifyContent: "space-between", fontSize: 12, marginTop: 6 },
-  targetLabel: { textAlign: "center", fontSize: 13, marginTop: 6 },
-};
