@@ -211,6 +211,17 @@ function BuyingOptions() {
                     recommended={pathRec.path}
                 />
 
+            <Stack direction="row" alignItems="center" spacing={2} sx={{ mb: 3 }}>
+                <Box className="compareDivider__line" />
+                <Typography variant="overline" sx={{ color: grey[600], letterSpacing: 2, fontWeight: 600, fontSize: "1rem" }}>
+                    Hidden Costs
+                </Typography>
+                <Box className="compareDivider__line" />
+            </Stack>
+
+            <Typography variant="body2" sx={{ color: grey[600], mb: 3, fontSize: "1rem" }}>
+                Hidden costs are expenses that aren't included in the purchase price of a home but are required to complete the transaction or maintain the property. These can include closing costs, inspection fees, insurance, property taxes, and unexpected repairs. Being aware of these costs helps you budget more accurately and avoid financial surprises during your home buying journey.
+            </Typography>
 
             <HiddenCosts />
         </Box>
