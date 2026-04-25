@@ -1,6 +1,6 @@
 export const keywords = [
     {
-        TERM: "Appraisal",
+        TERM: "Appraisal Fee",
         DEFINITION: "A professional estimation of the home's market value, often ordered by the lender to ensure the home is worth the loan amount."
     },
     {
@@ -24,7 +24,7 @@ export const keywords = [
         DEFINITION: "A formula lenders use to compare your monthly debt payments to your monthly income, often required to be below 43%."
     },
     {
-        TERM: "Earnest Money",
+        TERM: "Earnest Money Deposit",
         DEFINITION: "Often called a \"good faith deposit,\" is an upfront payment made by a buyer to a seller when making an offer on a home to prove they are serious about the purchase. It typically amounts to 1%–3% of the sale price, is held in an escrow account, and is used as security for the seller while taking the home off the market."
     },
     {

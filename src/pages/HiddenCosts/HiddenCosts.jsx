@@ -1,8 +1,32 @@
 import { useState } from "react";
-import { Box, Typography, Accordion, AccordionSummary, AccordionDetails } from "@mui/material";
+import { Box, Typography, Accordion, AccordionSummary, AccordionDetails, TextField, InputAdornment } from "@mui/material";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
+import { Search } from "@mui/icons-material";
+import GlossaryTerm from "../BuyingOptions/GlossaryTerm";
+import { keywords } from "../../shared/GlossaryTerms";
 
 function HiddenCosts() {
+    const [searchTerm, setSearchTerm] = useState("");
+
+    // Create a map of glossary terms for quick lookup
+    const glossaryMap = new Map();
+    keywords.forEach(term => {
+        glossaryMap.set(term.TERM.toLowerCase(), term.TERM);
+    });
+
+    // Function to check if a title should be wrapped as a glossary term
+    const renderTitle = (title) => {
+        const matchingTerm = glossaryMap.get(title.toLowerCase());
+        if (matchingTerm) {
+            return (
+            <Typography component="span" sx={{ fontWeight: "bold", color: "#1b1b1b", display: "inline" }}>
+                <GlossaryTerm term={matchingTerm}>{title}</GlossaryTerm>
+            </Typography>
+            );
+        }
+        return <Typography sx={{ fontWeight: "bold", color: "#1b1b1b", display: "inline" }}>{title}</Typography>;
+    };
+
     const costData = {
         mostCommon: {
             title: "Most Common",
@@ -111,6 +135,38 @@ function HiddenCosts() {
         }
     };
 
+    // Filter function to search across all sections
+    const getFilteredData = () => {
+        if (!searchTerm.trim()) {
+            return costData;
+        }
+
+        const searchLower = searchTerm.toLowerCase();
+        const filtered = {};
+
+        Object.keys(costData).forEach((sectionKey) => {
+            const section = costData[sectionKey];
+            const filteredItems = section.items.filter((item) => 
+                item.title.toLowerCase().includes(searchLower) || 
+                item.description.toLowerCase().includes(searchLower) ||
+                item.estimate.toLowerCase().includes(searchLower)
+            );
+            
+            if (filteredItems.length > 0) {
+                filtered[sectionKey] = {
+                    ...section,
+                    items: filteredItems
+                };
+            }
+        });
+
+        return filtered;
+    };
+
+    const displayData = searchTerm ? getFilteredData() : costData;
+
+    const totalResults = Object.values(displayData).reduce((total, section) => total + section.items.length, 0);
+
     // Reusable table component
     const CostTable = ({ title, items }) => (
         <Box sx={{ mb: 5 }}>
@@ -159,9 +215,9 @@ function HiddenCosts() {
                                 }
                             }}
                         >
-                            <Typography sx={{ fontWeight: "bold", color: "#1b1b1b" }}>
-                                {item.title}
-                            </Typography>
+                            <Box sx={{ fontWeight: "bold", color: "#1b1b1b" }}>
+                                {renderTitle(item.title)}
+                            </Box>
                             <Typography sx={{ color: "#1b1b1b" }}>
                                 {item.description.length > 80 ? `${item.description.substring(0, 80)}...` : item.description}
                             </Typography>
@@ -192,10 +248,63 @@ function HiddenCosts() {
 
     return (
         <Box sx={{ padding: "20px", maxWidth: "1200px", margin: "0 auto" }}>
+            {/* Search Bar */}
+            <Box sx={{ mb: 3, display: "flex", justifyContent: "flex-end" }}>
+                <TextField
+                    placeholder="Search for a cost..."
+                    value={searchTerm}
+                    onChange={(e) => setSearchTerm(e.target.value)}
+                    variant="outlined"
+                    size="small"
+                    sx={{ 
+                        width: "300px",
+                        backgroundColor: "white",
+                        borderRadius: 1
+                    }}
+                    slotProps={{
+                        input: {
+                            startAdornment: (
+                                <InputAdornment position="start">
+                                    <Search sx={{ color: "#666" }} />
+                                </InputAdornment>
+                            ),
+                        },
+                    }}
+                />
+            </Box>
+
+            {/* Search Results Summary */}
+            {searchTerm && (
+                <Typography sx={{ mb: 2, color: "#666", fontStyle: "italic" }}>
+                    Found {totalResults} result(s) for "{searchTerm}"
+                </Typography>
+            )}
+
             {/* All Three Tables */}
-            <CostTable title={costData.mostCommon.title} items={costData.mostCommon.items} />
-            <CostTable title={costData.common.title} items={costData.common.items} />
-            <CostTable title={costData.leastCommon.title} items={costData.leastCommon.items} />
+            {Object.keys(displayData).map((sectionKey) => (
+                <CostTable 
+                    key={sectionKey}
+                    title={displayData[sectionKey].title} 
+                    items={displayData[sectionKey].items} 
+                />
+            ))}
+
+            {/* No Results Message */}
+            {searchTerm && totalResults === 0 && (
+                <Box sx={{ 
+                    textAlign: "center", 
+                    py: 8, 
+                    backgroundColor: "#f5f5f5", 
+                    borderRadius: 2 
+                }}>
+                    <Typography variant="h6" sx={{ color: "#666" }}>
+                        No results found for "{searchTerm}"
+                    </Typography>
+                    <Typography variant="body2" sx={{ color: "#999", mt: 1 }}>
+                        Try searching for "closing", "inspection", "insurance", or "taxes"
+                    </Typography>
+                </Box>
+            )}
         </Box>
     );
 }
