@@ -82,6 +82,11 @@ function HiddenCosts() {
                     estimate: "$0 – $500 depending on lender"
                 },
                 {
+                    title: "Home Warranty",
+                    description: "A home warranty is a service contract that covers the repair or replacement of major home systems and appliances when they break down due to normal wear and tear. This typically includes items like HVAC systems, water heaters, electrical systems, plumbing, dishwashers, ovens/ranges, refrigerators, and sometimes washers/dryers. Unlike homeowners insurance (which covers damage from events like fire or storms), a home warranty covers mechanical failure. Many buyers request a seller-paid home warranty as a negotiation tool, especially for older homes. Policies usually last one year and require a service call fee ($75-$125) each time a technician visits. While warranties don't cover everything (pre-existing conditions, improper installation, or lack of maintenance), they can provide peace of mind for first-time buyers who don't have a large emergency fund. Read the fine print carefully—some policies have coverage caps and exclusions. If you're buying a home with older appliances or HVAC, a warranty can be a smart investment, especially in the first year when you're still building your savings.",
+                    estimate: "$400 – $800 per year (often negotiable for seller to pay)"
+                },
+                {
                     title: "Moving Costs",
                     description: "Moving costs are often underestimated by first-time buyers. Professional movers charge by weight and distance—local moves average $500-$2,000, while long-distance moves can exceed $5,000. DIY moves require truck rental ($100-$500/day), fuel, insurance, and equipment like dollies and pads. You'll also need packing supplies: boxes ($1-3 each), tape, bubble wrap, and specialty containers for TVs or artwork. Other moving expenses include cleaning your old rental (to get your security deposit back), appliance installation at the new home, changing your address (postal service charges a small fee), and taking time off work. Don't forget tips for movers (typically 15-20% of the total). To save money, declutter before packing—every box you don't move saves time and money.",
                     estimate: "$500 – $3,000"
