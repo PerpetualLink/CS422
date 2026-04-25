@@ -7,6 +7,8 @@ import HomeIcon from '@mui/icons-material/Home';
 import SavingsIcon from '@mui/icons-material/Savings';
 import AssignmentIcon from '@mui/icons-material/Assignment';
 import { ArrowForward, Description, PanTool } from '@mui/icons-material';
+import HomeSavingsCalculator from "../../shared/HomeSavingsCalculator";
+
 /*🏠 Why Buy a House?
 Buying a home is a massive leap toward financial independence. However, most people are unaware of the complexity involved. We are here to bridge that gap.
 Build Equity: Monthly payments become an investment in your future.
@@ -107,53 +109,56 @@ function GettingStarted() {
   const [activeStep, setActiveStep] = useState(0);
 //idk someone make this sound less stupid
   return (
-    <Box sx={{ maxWidth: 800, mx: 'auto', p: 3 }}>
-      <Typography variant="h3" gutterBottom sx={{ fontWeight: 'bold' }}>
-        Let's get you home.
-      </Typography>
-      <Typography variant="h6" color="text.secondary" sx={{ mb: 4 }}>
-        The process is a marathon, not a sprint. Follow these steps to start strong.
-      </Typography>
+    <div>
+      <Box sx={{ maxWidth: 800, mx: 'auto', p: 3 }}>
+        <Typography variant="h3" gutterBottom sx={{ fontWeight: 'bold' }}>
+          Let's get you home.
+        </Typography>
+        <Typography variant="h6" color="text.secondary" sx={{ mb: 4 }}>
+          The process is a marathon, not a sprint. Follow these steps to start strong.
+        </Typography>
 
-      <Stepper activeStep={activeStep} orientation="vertical">
-        {steps.map((step, index) => (
-          <Step key={step.label}>
-            <StepLabel
-              icon={step.icon}
-              onClick={() => setActiveStep(index)}
-              style={{ cursor: 'pointer' }}
-            >
-              <Typography variant="h6">{step.label}</Typography>
-            </StepLabel>
-            <StepContent>
-              <Card variant="outlined" sx={{ mb: 2, bgcolor: '#f9f9f9' }}>
-                <CardContent>
-                  <Typography>{step.description}</Typography>
-                </CardContent>
-              </Card>
-              <Box sx={{ mb: 2 }}>
-                <Button
-                  variant="contained"
-                  onClick={() => setActiveStep((prev) => prev + 1)}
-                  sx={{ mt: 1, mr: 1, backgroundColor: '#2e7d32', }}
-                >
-                  {index === steps.length - 1 ? 'Finish' : 'Next Step'}
-                </Button>
-              </Box>
-            </StepContent>
-          </Step>
-        ))}
-      </Stepper>
-      {/* useless?
-      {activeStep === steps.length && (
-        <Paper square elevation={0} sx={{ p: 3, mt: 3, bgcolor: '#000000ff' }}>
-          <Typography>Ready to run the numbers?</Typography>
-          <Button variant="contained" color="secondary" sx={{ mt: 2 }}>
-            Try the Mortgage Calculator
-          </Button>
-        </Paper>
-      )} */}
-    </Box>
+        <Stepper activeStep={activeStep} orientation="vertical">
+          {steps.map((step, index) => (
+            <Step key={step.label}>
+              <StepLabel
+                icon={step.icon}
+                onClick={() => setActiveStep(index)}
+                style={{ cursor: 'pointer' }}
+              >
+                <Typography variant="h6">{step.label}</Typography>
+              </StepLabel>
+              <StepContent>
+                <Card variant="outlined" sx={{ mb: 2, bgcolor: '#f9f9f9' }}>
+                  <CardContent>
+                    <Typography>{step.description}</Typography>
+                  </CardContent>
+                </Card>
+                <Box sx={{ mb: 2 }}>
+                  <Button
+                    variant="contained"
+                    onClick={() => setActiveStep((prev) => prev + 1)}
+                    sx={{ mt: 1, mr: 1, backgroundColor: '#2e7d32', }}
+                  >
+                    {index === steps.length - 1 ? 'Finish' : 'Next Step'}
+                  </Button>
+                </Box>
+              </StepContent>
+            </Step>
+          ))}
+        </Stepper>
+        {/* useless?
+        {activeStep === steps.length && (
+          <Paper square elevation={0} sx={{ p: 3, mt: 3, bgcolor: '#000000ff' }}>
+            <Typography>Ready to run the numbers?</Typography>
+            <Button variant="contained" color="secondary" sx={{ mt: 2 }}>
+              Try the Mortgage Calculator
+            </Button>
+          </Paper>
+        )} */}
+      </Box>
+      <HomeSavingsCalculator />
+    </div>
   );
 }
 

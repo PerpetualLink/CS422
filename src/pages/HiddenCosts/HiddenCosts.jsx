@@ -252,7 +252,7 @@ function HiddenCosts() {
     );
 
     return (
-        <Box sx={{ padding: "20px", maxWidth: "1200px", margin: "0 auto" }}>
+        <Box sx={{ padding: "20px", maxWidth: "1500px", margin: "0 auto" }}>
             {/* Search Bar */}
             <Box sx={{ mb: 3, display: "flex", justifyContent: "flex-end" }}>
                 <TextField
