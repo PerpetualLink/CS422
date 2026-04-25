@@ -17,15 +17,28 @@ function BuyingOptions() {
     const navigate = useNavigate();
     const { profile, updateProfile } = useBuyerProfile();
     const [showWhy, setShowWhy] = useState(true);
+    const [useCustom, setUseCustom] = useState(false);
     const [editingProfile, setEditingProfile] = useState(false);
 
     const recommendation = useMemo(() => computeRecommendation(profile), [profile]);
     const pathRec = useMemo(() => computePathRecommendation(profile), [profile]);
 
-    const downPayment = profile.homePrice * 0.035;
-    const estMonthly = Math.round(profile.homePrice * 0.965 * 0.0065 + profile.homePrice * 0.001);
+    const downPercent = (useCustom) ? profile.downPercent : 3.5;
+    const downPayment = profile.homePrice * downPercent / 100;
+    const avgPmiCost = (downPercent < 20 ) ? profile.homePrice * (0.01 / 12) : 0; // If less than 20% down payment then it's required, but if not then it is generally about 1% annually.
+    const avgPropertyTax = profile.homePrice * (0.011 / 12) // 1.1% is the low national average for annual tax rate.
+    const avgHomeInsurance = 2400 / 12; // 2400 per year is the national average
+    const downPaymentDiff = profile.homePrice * ((100 - downPercent) / 100); // Calculate remaining home price which would then be the theoretical loan amount.
+    const avgLoanInterestRate = 0.06 / 12 // average mortgage regardless of FHA or Conventional is around 6% annually
+    const estMonthly = Math.round(downPaymentDiff * avgLoanInterestRate + avgPmiCost + avgPropertyTax + avgHomeInsurance);
     const method = methodMeta[recommendation.method];
     
+    console.log(downPaymentDiff)
+    console.log(avgLoanInterestRate)
+    console.log(avgPmiCost)
+    console.log(avgPropertyTax)
+    console.log(avgHomeInsurance)
+
     const typographyStling = {
         fontSize: "1rem"
     }
@@ -100,9 +113,8 @@ function BuyingOptions() {
                             <NumberStat
                                 label="Down payment"
                                 value={fmt(downPayment)}
-                                altValue={fmt(20000)} // TODO Fix with user inputed down payment and percentage
-                                caption={<Typography variant="caption" sx={{ color: grey[600], flexGrow: 1 }}>3.5% of target price </Typography>}
-                                altCaption={<Typography variant="caption" sx={{ color: grey[600], flexGrow: 1 }}>{`${20}% of target price`}</Typography>}
+                                caption={<Typography variant="caption" sx={{ color: grey[600], flexGrow: 1 }}>{`${downPercent}% of target price `}</Typography>}
+                                onToggle={setUseCustom}
                                 toggle={true}
                             />
                             <NumberStat
@@ -128,7 +140,7 @@ function BuyingOptions() {
                             <NumberStat
                                 label="Est. monthly payment"
                                 value={`~${fmt(estMonthly)}`}
-                                caption={<Typography variant="caption" sx={{ color: grey[600] }}>incl. <GlossaryTerm term="PMI" />, tax, ins.</Typography>}
+                                caption={<Typography variant="caption" sx={{ color: grey[600] }}>incl. <GlossaryTerm term="PMI" />, <GlossaryTerm term="Property Taxes" />, <GlossaryTerm term="Interest" />, <GlossaryTerm term="Homeowner Insurance" /></Typography>}
                             />
                             <NumberStat
                                 label="Time to close"
@@ -169,7 +181,7 @@ function BuyingOptions() {
                                     )
                                     }
                                     <Typography variant="body2" sx={{ color: grey[800], lineHeight: 1.6 }}>
-                                        At 3.5% down, you'd need ~{fmt(downPayment)} — {profile.saved >= downPayment ? "within" : "more than"} your {fmt(profile.saved)} saved.
+                                        At {downPercent}% down, you'd need ~{fmt(downPayment)} — {profile.saved >= downPayment ? "within" : "more than"} your {fmt(profile.saved)} saved.
                                         {" "}Remember to leave room for <GlossaryTerm term="Closing costs">closing costs</GlossaryTerm> (~$5,000-$7,000).
                                     </Typography>
                                 </Stack>
@@ -177,7 +189,7 @@ function BuyingOptions() {
                                     <Stack direction="row" spacing={1.5} alignItems="flex-start">
                                         <WarningAmber fontSize="small" sx={{ color: amber[700], mt: 0.25, flexShrink: 0 }} />
                                         <Typography variant="body2" sx={{ color: grey[800], lineHeight: 1.6 }}>
-                                            FHA requires <GlossaryTerm term="PMI" /> for the life of the loan. Once you have ~20% equity, you can refinance into a conventional loan to drop it.
+                                            FHA requires <GlossaryTerm term="PMI" /> for the life of the loan. Once you have ~20% equity, you can <GlossaryTerm term="Refinancing">refinance</GlossaryTerm> into a conventional loan to drop it.
                                         </Typography>
                                     </Stack>
                                 )}
@@ -223,7 +235,8 @@ function BuyingOptions() {
             </Stack>
 
             <Typography variant="body2" sx={{ color: grey[600], mb: 3, fontSize: "1rem" }}>
-                Hidden costs are expenses that aren't included in the purchase price of a home but are required to complete the transaction or maintain the property. These can include closing costs, inspection fees, insurance, property taxes, and unexpected repairs. Being aware of these costs helps you budget more accurately and avoid financial surprises during your home buying journey.
+                Hidden costs are expenses that can arise as part of the home buying process that go beyond the initial list price. These include closing costs, inspection fees, insurance, property taxes, and unexpected repairs.
+                Being aware of these costs helps you budget more accurately and avoid financial surprises during your home buying journey.
             </Typography>
 
             <HiddenCosts />

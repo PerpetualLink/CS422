@@ -2,8 +2,13 @@ import { Box, Button, Switch, Typography } from "@mui/material";
 import "./NumberStat.scss";
 import { useState } from "react";
 
-function NumberStat({ altCaption, altValue, label, value, valueColor, caption, toggle }) {
+function NumberStat({ altCaption, altValue, label, value, valueColor, caption, onToggle, toggle }) {
     const [isOn, setIsOn] = useState(true);
+
+    const handleToggle = () => {
+        setIsOn((prev) => !prev);
+        onToggle((prev) => !prev);
+    }
 
     return (
         <Box sx={{ flex: 1 }}>
@@ -43,7 +48,7 @@ function NumberStat({ altCaption, altValue, label, value, valueColor, caption, t
                         marginRight: "2px",
                         backgroundColor: (!isOn) && "rgba(129,212,250,0.3)"
                     }}
-                    onClick={() => setIsOn((prev) => !prev)}
+                    onClick={handleToggle}
                 >
                     {"Custom"}
                 </Button>
@@ -59,7 +64,7 @@ function NumberStat({ altCaption, altValue, label, value, valueColor, caption, t
                         borderRadius: "999px",
                         backgroundColor: (isOn) && "rgba(129,212,250,0.3)"
                     }}
-                    onClick={() => setIsOn((prev) => !prev)}
+                    onClick={handleToggle}
                 >
                     {"FHA"}
                 </Button>
@@ -74,7 +79,7 @@ function NumberStat({ altCaption, altValue, label, value, valueColor, caption, t
                     mt: 0.5
                 }}
             >
-                {(!isOn) ? altValue : value}
+                {value}
             </Typography>
             <div
                 style={{
@@ -84,7 +89,7 @@ function NumberStat({ altCaption, altValue, label, value, valueColor, caption, t
                     // justifyContent: "center"
                 }}
             >
-            {(!isOn) ? altCaption : caption}
+            {caption}
             </div>
         </Box>
     );

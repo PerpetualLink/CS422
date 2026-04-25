@@ -31,7 +31,8 @@ $amber-700: #ffa000;
     .profileBar {
         background-color: $green-50;
         border-bottom: 1px solid $green-200;
-        padding: 16px 32px;
+        padding: 0 32px;
+        height: 63.55px;
         display: flex;
         align-items: center;
         justify-content: space-between;

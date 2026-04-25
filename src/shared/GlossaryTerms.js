@@ -36,16 +36,32 @@ export const keywords = [
         DEFINITION: "A mortgage insured by the Federal Housing Administration (FHA) and issued by an FHA-approved lender. It's popular with first-time buyers due to its lower credit score and down payment (as low as 3.5%) requirements."
     },
     {
+        TERM: "Homeowner Insurance",
+        DEFINITION: "Protects you financially if your home is damaged by covered perils like fire, windstorms, hail, lightning, theft, or vandalism. It also provides liability coverage if someone is injured on your property. Most lenders require you to purchase a policy before closing and pay the first year's premium upfront. The national average is around $2,400/year which is what we used for our monthly cost calculation, but the actual amount you pay can vary greatly."
+    },
+    {
         TERM: "Home Owner",
         DEFINITION: "A direct purchase from the homeowner (commonly called For Sale By Owner or FSBO) occurs when the seller lists and sells the property without using a real estate agent, negotiating directly with the buyer."
-    },    
+    },
+    {
+        TERM: "Interest",
+        DEFINITION: "Mortgage loans alway come with an interest rate. This can greatly affect how much you are paying for the purchase in the long run. The national average is around 6% annually which is what we used in our monthly calculation."
+    },
     {
         TERM: "Private Mortgage Insurance (PMI)",
-        DEFINITION: "Insurance required by lenders for conventional loans when the down payment is less than 20%. It protects the lender if you default and is an added monthly cost for you."
+        DEFINITION: "Insurance required by lenders for conventional loans when the down payment is less than 20%. It protects the lender if you default and is an added monthly cost for you. The national average for this is about 1% annually which is what was used for the monthly calculation, but could vary higher and lower depending on your credit and loan amount."
+    },
+    {
+        TERM: "Property Taxes",
+        DEFINITION: "An annual or semiannual fee paid by real estate owners to local governments that varies greatly by state, region, and city. The national average is about 1.1% of the home's value which we use in our monthly calculation.",
     },
     {
         TERM: "Real Estate Agent",
         DEFINITION: "A real estate agent helps buyers find homes, negotiate offers, and manage paperwork throughout the purchasing process. Agents are licensed professionals who understand the housing market and transaction procedures."
+    },
+    {
+        TERM: "Refinancing",
+        DEFINITION: "The act of replacing a loan with a new one. In this context an existing mortgage loan would be replaced in a new one that could provide better terms ranging from a lower interest rate, lower monthly payment, shorter term length, and more. It is a powerful financial tool that could provide you greater financial stability and flexibility over the course of home ownership."
     },
     {
         TERM: "Tax Auction",

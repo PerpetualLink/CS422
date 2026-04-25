@@ -14,6 +14,7 @@ function Glossary() {
     const [wordList, setWordList] = useState(keywords);
 
     useEffect(() => {
+        // TODO Fix infinit loop bug that cuases this to run endlessly
         if (searchWord) {
             const newWordList = keywords.filter((word) => word.TERM.toLowerCase().includes(searchWord.toLowerCase()));
 
@@ -33,7 +34,15 @@ function Glossary() {
     }, [profile])
 
     const toggleDrawer = () => {        
-        updateProfile({ "glossaryOpen": !profile.glossaryOpen });
+        updateProfile({
+            "glossaryOpen": !profile.glossaryOpen,
+            "glossaryWord": ""
+        });
+    }
+
+    const normalOpen = () => {
+        setSearchWord("");
+        toggleDrawer();
     }
 
     return (
@@ -42,7 +51,7 @@ function Glossary() {
                 className="glossaryButton"
                 variant="contained"
                 startIcon={<MenuBookIcon />}
-                onClick={toggleDrawer}
+                onClick={normalOpen}
             >
                 {"Glossary"}
             </Button>
