@@ -40,6 +40,10 @@ export const keywords = [
         DEFINITION: "Often called a \"good faith deposit,\" is an upfront payment made by a buyer to a seller when making an offer on a home to prove they are serious about the purchase. It typically amounts to 1%–3% of the sale price, is held in an escrow account, and is used as security for the seller while taking the home off the market."
     },
     {
+        TERM: "Equity",
+        DEFINITION: "The portion of your home that you actually \"own.\" While you may live in the house, the bank effectively owns whatever part is left on your mortgage. Equity is the difference between what the home is worth and what you still owe the lender"
+    },
+    {
         TERM: "Escrow",
         DEFINITION: "A neutral third party holding money or assets (like a house deed) during a transaction to ensure both sides fulfill their promises before the deal closes. It protects buyers and sellers by holding funds until conditions, such as inspections or financing, are met."
     },

@@ -13,25 +13,6 @@ export default function HomeSavingsCalculator({ onClose, isDraggable = true }) {
   const { profile, updateProfile } = useBuyerProfile();
   const { homePrice, downPercent, pmi, saved, creditScore } = profile;
 
-  const [pos, setPos] = useState({
-    x: typeof window !== "undefined" ? window.innerWidth / 2 - 220 : 100,
-    y: 100,
-  });
-
-  const onMouseDown = useCallback((e) => {
-    if (!isDraggable) return;
-    if (e.target.tagName === "INPUT") return;
-    const startX = e.clientX - pos.x;
-    const startY = e.clientY - pos.y;
-    const onMouseMove = (e) => setPos({ x: e.clientX - startX, y: e.clientY - startY });
-    const onMouseUp = () => {
-      document.removeEventListener("mousemove", onMouseMove);
-      document.removeEventListener("mouseup", onMouseUp);
-    };
-    document.addEventListener("mousemove", onMouseMove);
-    document.addEventListener("mouseup", onMouseUp);
-  }, [pos, isDraggable]);
-
   const downPayment = homePrice * (downPercent / 100);
   const closingCosts = homePrice * 0.03;
   const pmiBuffer = pmi ? 2000 : 0;
@@ -55,22 +36,8 @@ export default function HomeSavingsCalculator({ onClose, isDraggable = true }) {
 };
 
   return (
-    <div
-      onMouseDown={onMouseDown}
-      style={{
-        position: isDraggable ? "fixed" : "relative",
-        left: isDraggable ? pos.x : 0,
-        top: isDraggable ? pos.y : 0,
-        zIndex: 1000,
-        cursor: isDraggable ? "grab" : "auto",
-        userSelect: "none",
-      }}
-    >
+    <div>
       <div style={styles.wrapper}>
-        {isDraggable && onClose && (
-          <button onClick={onClose} style={styles.closeBtn}>✕</button>
-        )}
-
         <div>
           <Typography style={styles.title}>
             {"Savings Calculator"}
