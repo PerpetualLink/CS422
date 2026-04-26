@@ -228,7 +228,7 @@ export default function HomeSavingsCalculator({ onClose, isDraggable = true }) {
 
         <div style={styles.resultContainer}>
           <FormControl sx={{ position: "absolute", top: "345px", left: "20px"}}>
-            <FormLabel id="demo-radio-buttons-group-label"><GlossaryTerm term={"PMI"}>PMI</GlossaryTerm> First Year?</FormLabel>
+            <FormLabel id="demo-radio-buttons-group-label"><GlossaryTerm term={"PMI"}>PMI</GlossaryTerm> First Year Required?</FormLabel>
             <RadioGroup
               aria-labelledby="demo-radio-buttons-group-label"
               value={pmi}
