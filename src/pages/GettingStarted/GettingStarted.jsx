@@ -181,9 +181,9 @@ function GettingStarted() {
                 </Typography>
               </StepLabel>
               <StepContent>
-                <Typography variant="body2" sx={{ color: grey[800], lineHeight: 1.7, whiteSpace: 'pre-line', fontSize: '1rem', mt: 1 }}>
+                <div style={{ fontSize: "1rem" }}>
                   {step.description}
-                </Typography>
+                </div>
               </StepContent>
             </Step>
           ))}

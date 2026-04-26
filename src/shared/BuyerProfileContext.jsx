@@ -9,6 +9,7 @@ const defaultProfile = {
     homePrice: 300000,
     downPercent: 20,
     saved: 20000,
+    monthlySave: 1000,
     pmi: false,
     creditScore: 640,   // not captured in current calculator; used by Financing logic
     timeline: "medium", // 'urgent' | 'medium' | 'flexible'

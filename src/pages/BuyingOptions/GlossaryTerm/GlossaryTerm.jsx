@@ -12,10 +12,10 @@ function GlossaryTerm({ term, children }) {
         <Tooltip
             title={
                 <Box sx={{ p: 0.5 }}>
-                    <Typography variant="subtitle2" sx={{ fontWeight: 700, mb: 0.5, color: green[200] }}>
+                    <Typography variant="subtitle2" sx={{ fontWeight: 700, fontSize: "1rem",mb: 0.5, color: green[200] }}>
                         {term}
                     </Typography>
-                    <Typography variant="caption" sx={{ lineHeight: 1.5 }}>
+                    <Typography variant="caption" sx={{ lineHeight: 1.5, fontSize: "0.9rem" }}>
                         {keywords.find((word) => word.TERM.includes(term)).DEFINITION}
                     </Typography>
                 </Box>
