@@ -235,8 +235,8 @@ export default function HomeSavingsCalculator({ onClose, isDraggable = true }) {
               name="radio-buttons-group"              
               style={{ display: "flex", flexDirection: "column" }}
             >
-              <FormControlLabel disabled={!pmi} value={true} control={<Radio />} label="Yes" />
-              <FormControlLabel disabled={pmi} value={false} control={<Radio />} label="No" />
+              <FormControlLabel disabled={true} value={true} control={<Radio />} label="Yes" />
+              <FormControlLabel disabled={true} value={false} control={<Radio />} label="No" />
             </RadioGroup>
           </FormControl>
           <div style={{ marginTop: 4, marginBottom: 12, borderTop: "1px solid #eee" }} />
