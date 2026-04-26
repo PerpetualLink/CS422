@@ -273,7 +273,7 @@ export default function HomeSavingsCalculator({ onClose, isDraggable = true }) {
                 Remaining to Save:
               </span>
               <span style={{ display: "block", fontSize: "1.2rem", marginTop: 4, fontWeight: "bold" }}>
-                {fmt(recommendedSavings - saved)}
+                {(recommendedSavings - saved > 0) ? fmt(recommendedSavings - saved) : "$0"}
               </span>
             </div>
             <FormControl sx={{ flexDirection: "row", margin: "0 4px 16px 0" }}>

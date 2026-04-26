@@ -1,8 +1,8 @@
-import { useMemo, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { amber, green, grey, red } from "@mui/material/colors";
 import { Box, Button, Card, CardContent, Collapse, Divider, Stack, Tooltip, Typography} from "@mui/material";
-import { AccountBalanceWallet, CheckCircleOutline, Edit, ExpandMore, ExpandLess, Home, TrendingFlat, WarningAmber } from "@mui/icons-material";
+import { AccountBalanceWallet, CheckCircleOutline, Edit, ExpandMore, ExpandLess, Home, TrendingFlat, WarningAmber, Circle } from "@mui/icons-material";
 import { useBuyerProfile } from "../../shared/BuyerProfileContext";
 import ComparisonTable from "./ComparisonTable";
 import { fmt, methodColumns, methodMeta, methodRows, pathColumns, pathRows, computeRecommendation, computePathRecommendation } from "./recommendationEngine";
@@ -19,6 +19,23 @@ function BuyingOptions() {
     const [showWhy, setShowWhy] = useState(true);
     const [useCustom, setUseCustom] = useState(false);
     const [editingProfile, setEditingProfile] = useState(false);
+
+    const [tempProfile, setTempProfile] = useState({...profile});
+    let tempSet = false;
+
+    useEffect(() => {
+        if (!editingProfile && !tempSet) {
+            setTempProfile({...profile});
+            console.log(tempProfile)
+            tempSet = true;
+        }
+    }, [profile]);
+
+    const handleCancel = () => {
+        updateProfile({...tempProfile});
+        setEditingProfile(false);
+        tempSet = false;
+    }
 
     const recommendation = useMemo(() => computeRecommendation(profile), [profile]);
     const pathRec = useMemo(() => computePathRecommendation(profile), [profile]);
@@ -56,15 +73,14 @@ function BuyingOptions() {
                         <Typography variant="caption" className="eyebrow">
                             Based on what you told us
                         </Typography>
-                        <Box sx={{ color: grey[400] }}>•</Box>
+                        <Circle sx={{ color: grey[400], fontSize: "0.5rem" }} />
                         <ProfileSummary
                             profile={profile}
                             updateProfile={updateProfile}
                             editing={editingProfile}
-                            setEditing={setEditingProfile}
                         />
                     </Stack>
-                    {!editingProfile && (
+                    {!editingProfile ? (
                         <Button
                             size="small"
                             startIcon={<Edit fontSize="small" />}
@@ -73,6 +89,23 @@ function BuyingOptions() {
                         >
                             Edit
                         </Button>
+                    ) : (
+                        <>
+                        <Button
+                            size="small"
+                            onClick={handleCancel}
+                            sx={{ color: green[800], fontWeight: 600 }}
+                        >
+                            Cancel
+                        </Button>
+                        <Button
+                            size="small"
+                            onClick={() => setEditingProfile(false)}
+                            sx={{ color: green[800], fontWeight: 600 }}
+                        >
+                            Done
+                        </Button>
+                    </>
                     )}
                 </Box>
 

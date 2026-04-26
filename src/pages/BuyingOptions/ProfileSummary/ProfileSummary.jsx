@@ -1,82 +1,82 @@
 import { Box, Button, FormControl, InputAdornment, InputLabel, OutlinedInput, Stack, TextField, Typography } from "@mui/material";
 import { green, grey } from "@mui/material/colors";
 import { fmt } from "../recommendationEngine";
+import { Circle } from "@mui/icons-material";
 
 const typographyStyling = {
     fontSize: "1rem",
 };
 
-function ProfileSummary({ profile, updateProfile, editing, setEditing }) {
-    if (editing) {
-        const handleUpdate = (e, f) => {
-            const maxValue = f?.max;
+function ProfileSummary({ profile, updateProfile, editing }) {
+    const handleUpdate = (e, f) => {
+        const rawValue = e.target.value.replace(/,/g, '');
 
-            if (maxValue) {
-                if (e.target.value >= 0 && e.target.value <= maxValue) {
-                    updateProfile({ [f.key]: Number(e.target.value) });
-                }
-            }
-            else {
-                updateProfile({ [f.key]: Number(e.target.value) });
+        const maxValue = f?.max;
+
+        if (maxValue) {
+            if (e.target.value >= 0 && e.target.value <= maxValue) {
+                updateProfile({ [f.key]: Number(rawValue) });
             }
         }
+        else {
+            updateProfile({ [f.key]: Number(rawValue) });
+        }
+    }
 
-        const fields = [
-            { key: "saved", label: "Saved:", icon: "$", width: 110 },
-            { key: "creditScore", label: "Credit:", max: 850, width: 100 },
-            { key: "homePrice", label: "Home Price:", icon: "$", width: 110 },
-            { key: "downPercent", label: "Down Payment:", end: true, icon: "%", max: 100, width: 110 },
-        ];
-        return (
-            <Stack direction="row" spacing={2} alignItems="center" flexWrap="wrap" sx={{ flexGrow: 1 }}>
-                {fields.map((f) => (
-                    <label key={f.key} style={{ display: "flex", fontSize: "1rem" }}>
+    const fields = [
+        { key: "saved", label: "Savings:", icon: "$", width: String(profile.saved).length * 8 + 30 },
+        { key: "homePrice", label: "Home Price:", icon: "$", width: String(profile.homePrice).length * 8 + 30 },
+        { key: "downPercent", label: "Down Payment:", end: true, icon: "%", max: 100, width: String(profile.downPercent).length * 8 + 20},
+        { key: "creditScore", label: "Credit:", max: 850, width: 38 },
+    ];
+    
+    const styles = {
+        enabled: { paddingLeft: 4, paddingRight: 0, height: "24px", backgroundColor: "white" },
+        disabled: { paddingLeft: 4, paddingRight: 0, height: "24px", backgroundColor: "transparent" }
+    }
+
+    return (
+        <div style={{ display: "flex", flexGrow: 1, gap: "16px" }}>
+            {fields.map((f, index) => (
+                <label key={f.key} style={{ display: "flex", fontSize: "1rem" }}>
+                    <Typography sx={{ fontSize: "1rem", marginRight: "4px", fontWeight: "bold" }} >{f.label}</Typography>
+                    {editing ? (
                         <FormControl>
-                            <InputLabel sx={{ fontWeight: "bold"}}>
-                                {f.label}
-                            </InputLabel>
                             <OutlinedInput
                                 startAdornment={((f?.icon) && (!f?.end)) && <InputAdornment position="start" style={{ margin: "unset" }}>{f.icon}</InputAdornment>}
                                 endAdornment={(f?.end) && <InputAdornment position="end" style={{ margin: "unset" }}>{f.icon}</InputAdornment>}
+                                disabled={!editing}
                                 onChange={(e) => handleUpdate(e, f)}
-                                type={"number"}
-                                label={f.label}
                                 inputProps={{ min: 0, max: (f?.max) && 100 }}
-                                value={profile[f.key]}
+                                value={profile[f.key].toLocaleString('en-US')}
                                 style={{ 
                                     paddingLeft: 4,
-                                    height: "40px",
+                                    paddingRight: 0,
+                                    height: "24px",
                                     width: f.width,
                                     backgroundColor: "white",
                                 }}
                                 slotProps={{
                                     input: {
                                         style: {
-                                            paddingRight: 0
+                                            paddingRight: 0,
+                                            paddingLeft: 0,                                        
                                         }
                                     }
                                 }}
                             />
                         </FormControl>
-                    </label>
-                ))}
-                <div style={{ flexGrow: 1 }}/>
-                <Button size="small" onClick={() => setEditing(false)} sx={{ color: green[800], fontWeight: 600 }}>
-                    Done
-                </Button>
-            </Stack>
-        );
-    }
-    return (
-        <Stack direction="row" spacing={2} alignItems="center" flexWrap="wrap">
-            <Typography sx={typographyStyling}>Saved <strong>{fmt(profile.saved)}</strong></Typography>
-            <Box sx={{ color: grey[400] }}>•</Box>
-            <Typography sx={typographyStyling}>Credit <strong>{profile.creditScore}</strong></Typography>
-            <Box sx={{ color: grey[400] }}>•</Box>
-            <Typography sx={typographyStyling}>Home Price: <strong>{fmt(profile.homePrice)}</strong></Typography>
-            <Box sx={{ color: grey[400] }}>•</Box>
-            <Typography sx={typographyStyling}>Down Payment <strong>{(profile.downPercent)}%</strong></Typography>
-        </Stack>
+                    ) : (
+                        <div style={{ display: "inline-flex", width: f.width }}>
+                            <Typography>{(f?.icon) && (!f?.end) && "$"}</Typography>
+                            <Typography>{profile[f.key].toLocaleString('en-US')}</Typography>
+                            <Typography>{(f?.end) && "%"}</Typography>
+                        </div>
+                    )}
+                    {(index < 3) && <Circle sx={{ alignSelf: "center", marginLeft: "12px", fontSize: "0.5rem", color: grey[400] }}/>}
+                </label>
+            ))}
+        </div>
     );
 }
 export default ProfileSummary;
