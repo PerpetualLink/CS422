@@ -95,11 +95,11 @@ export default function HomeSavingsCalculator({ onClose, isDraggable = true }) {
   arrowUp: { borderBottom: "7px solid #000", borderLeft: "7px solid transparent", borderRight: "7px solid transparent", height: 0, marginLeft: "-5.5px", width: 0 },
   currentLabel: { left: `calc(360px * ${percent / 100})`, position: "relative", width: "fit-content" },
   editContainer: { padding: "16px 16px 0" },
-  goalLine: { background: "black", height: "20px", left: `calc(360px * ${(targetPercent > 100) ? 1 : targetPercent / 100})`, marginTop: "-38.5px", position: "relative", width: "2px" },
+  goalLine: { background: "black", height: "20px", left: `calc(360px * ${(targetPercent > 100) ? 1 : targetPercent / 100})`, marginTop: "-38.5px", position: "relative", width: "2px", transition: "left 450ms ease-in-out" },
   goalLabels: { display: "flex", fontFamily: "Roboto, san-serif", fontSize: "0.9rem", justifyContent: "space-between", margin: "0 -10px 0" },
   label: { fontFamily: "Roboto, san-serif", fontSize: 14, marginTop: 10 },
   resultContainer: { padding: "0 0 16px 0" },
-  targetLabel: { left: `calc(360px * ${(targetPercent > 100) ? 1 : targetPercent / 100})`, position: "relative", top: "15px" },
+  targetLabel: { left: `calc(360px * ${(targetPercent > 100) ? 1 : targetPercent / 100})`, position: "relative", top: "15px", transition: "left 400ms ease-in-out" },
   title: { fontSize: "1.4rem", fontWeight: "bold", textAlign: "center", marginBottom: "8px" },
   wrapper: { position: "relative", display: "flex", flexDirection: "column", gap: 16, borderRadius: 14, background: "#fff", boxShadow: "0 8px 32px rgba(0,0,0,0.18)", fontFamily: "Inter", maxWidth: 440 },
 };
