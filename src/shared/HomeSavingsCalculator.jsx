@@ -88,7 +88,7 @@ export default function HomeSavingsCalculator({ onClose, isDraggable = true }) {
               value={percent}
               variant={"determinate"}
             />
-            <div style={{}}>{`${(saved/recommendedSavings * 100).toFixed(0)}% of Goal`}</div>
+            <div style={{ fontFamily: "Roboto, san-serif", position: "absolute", top: "70px", fontSize: "0.8rem", left: "45px" }}>{`${(saved/recommendedSavings * 100).toFixed(0)}% of Goal`}</div>
             <div style={styles.goalLabels}><span>{"$0"}</span><span>{fmt(homePrice)}</span></div>
             <div
               style={styles.goalLine}
