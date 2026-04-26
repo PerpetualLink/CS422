@@ -1,4 +1,4 @@
-import { Box, Button, Switch, Typography } from "@mui/material";
+import { Box, Switch, ToggleButton, ToggleButtonGroup, Typography } from "@mui/material";
 import "./NumberStat.scss";
 import { useState } from "react";
 
@@ -37,37 +37,36 @@ function NumberStat({ altCaption, altValue, label, value, valueColor, caption, o
                     // justifyContent: "center"
                 }}
             >
-                <Button
-                    className={`numberStat__label toggle`}
-                    style={{
-                        color: "black",
-                        fontWeight: (!isOn) && "700",
-                        height: "20px",
-                        padding: "8px",
-                        fontSize: "0.7rem",
-                        marginRight: "2px",
-                        backgroundColor: (!isOn) && "rgba(129,212,250,0.3)"
-                    }}
-                    onClick={handleToggle}
-                >
-                    {"Custom"}
-                </Button>
-                <Button
-                    className="numberStat__label toggle"
-                    style={{
-                        color: "black",
-                        fontWeight: (isOn) && "700",
-                        height: "20px",
-                        padding: "8px",
-                        minWidth: "unset",
-                        fontSize: "0.7rem",
-                        borderRadius: "999px",
-                        backgroundColor: (isOn) && "rgba(129,212,250,0.3)"
-                    }}
-                    onClick={handleToggle}
-                >
-                    {"FHA"}
-                </Button>
+                <ToggleButtonGroup onClick={handleToggle}>
+                    <ToggleButton
+                        className={`numberStat__label toggle`}
+                        selected={!isOn}
+                        style={{
+                            color: "black",
+                            fontWeight: (!isOn) && "700",
+                            height: "20px",
+                            padding: "8px",
+                            fontSize: "0.7rem",
+                            backgroundColor: (!isOn) ? "#80CBC4" : "#FAFAFA"
+                        }}
+                    >
+                        {"Custom"}
+                    </ToggleButton>
+                    <ToggleButton
+                        className="numberStat__label toggle"
+                        selected={isOn}
+                        style={{
+                            color: "black",
+                            fontWeight: (isOn) && "700",
+                            height: "20px",
+                            padding: "8px",
+                            fontSize: "0.7rem",
+                            backgroundColor: (isOn) ? "#80CBC4" : "#FAFAFA"
+                        }}
+                    >
+                        {"FHA"}
+                    </ToggleButton>
+                </ToggleButtonGroup>
                 </div>
             )}
             </div>
