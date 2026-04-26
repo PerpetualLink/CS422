@@ -1,171 +1,173 @@
 import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import {
   Box, Stepper, Step, StepLabel, StepContent,
-  Button, Typography, Paper, Card, CardContent, Grid
+  Button, Typography, Stack,
 } from '@mui/material';
+import { grey, green } from '@mui/material/colors';
 import HomeIcon from '@mui/icons-material/Home';
 import SavingsIcon from '@mui/icons-material/Savings';
 import AssignmentIcon from '@mui/icons-material/Assignment';
 import { ArrowForward, Description, PanTool } from '@mui/icons-material';
-import HomeSavingsCalculator from "../../shared/HomeSavingsCalculator";
-
-/*🏠 Why Buy a House?
-Buying a home is a massive leap toward financial independence. However, most people are unaware of the complexity involved. We are here to bridge that gap.
-Build Equity: Monthly payments become an investment in your future.
-Stability: No more unexpected rent hikes or lease terminations.
-Creative Control: It is your space to paint, renovate, and style.
-Tax Benefits: Potential deductions for mortgage interest and property taxes.
-💰 1. Can You Afford It?
-Houses are expensive. The true cost goes well beyond the $200k–$500k "sticker price." You must account for hidden fees that many first-time buyers overlook.
-The Hidden Costs:
-Closing Costs: Usually 2–5% of the home price.
-Earnest Money: A "good faith" deposit to secure the contract.
-Inspection Fees: Upfront costs to ensure the home is safe.
-Maintenance Fund: Savings for unexpected roof or HVAC repairs.
-👉 Action: Use the Wizard on the right to input your data. This tool identifies the info you need before estimating your savings goals.
-🗺️ 2. The Homebuying Roadmap
-Before you look at houses, you need to understand the sequence. Skipping steps often leads to heartbreak and lost deposits.
-Check Your Credit: High scores unlock lower interest rates.
-Get Pre-Approved: This proves to sellers you are a serious buyer.
-Find an Agent: A buyer’s agent usually costs you $0 but saves you thousands.
-Define Your Needs: List your "must-haves" vs. "nice-to-haves" (e.g., yard vs. office).
-📄 3. Your Document Checklist
-You will need to prove your financial history to lenders. Start gathering these digital or physical copies now to speed up your application.
-Proof of Income: Last two years of W-2s and recent pay stubs.
-Tax Returns: Typically the last two years of federal filings.
-Bank Statements: 60 days of history for all checking/savings accounts.
-ID & Social Security: Valid driver’s license or passport.
-🛑 4. Common Pitfalls to Avoid
-Many first-time buyers make mistakes in the "getting started" phase that hurt their chances later.
-Opening New Credit: Do not buy a new car or apply for credit cards now.
-Changing Jobs: Lenders look for 2+ years of consistent employment.
-Draining Savings: Ensure you have an "emergency fund" left after the down payment.
-Ignoring Location: You can change the kitchen, but you can't change the neighborhood.
-🚀 Next Steps
-Once you have completed the Wizard on this page, you are ready for the deep dive.
-Review your Pre-Calculated Summary.
-Navigate to the Financing Page.
-Compare Purchasing Methods based on your specific score and savings.*/
+import HomeSavingsCalculator from '../../shared/HomeSavingsCalculator';
 
 const steps = [
   {
     label: 'Why Buy a House?',
-    description: `Buying a home is a massive leap toward financial independence. However, most people are unaware of the complexity involved. We are here to bridge that gap.
-    Build Equity: Monthly payments become an investment in your future.
-    Stability: No more unexpected rent hikes or lease terminations.
-    Creative Control: It is your space to paint, renovate, and style.
-    Tax Benefits: Potential deductions for mortgage interest and property taxes.`,
+    description: `Buying a home is one of the biggest leaps toward financial independence you can take. Here's why it's worth the effort:
+
+• Build Equity: Every mortgage payment chips away at what you owe and builds ownership in an appreciating asset.
+• Stability: Lock in your housing costs — no landlord can raise your rent or end your lease.
+• Creative Control: It's yours to paint, renovate, and make your own.
+• Tax Benefits: You may be able to deduct mortgage interest and property taxes.`,
     icon: <SavingsIcon style={{ color: '#2e7d32' }} />,
   },
   {
     label: 'Can You Afford It?',
-    description: `Houses are expensive and the total
-    cost of purchasing a home goes well beyond the inital sticker price
-    of 200k, 400k, etc. On the right we have a wizard that will walk 
-    through the required pieces of info that we recommend you have in mind
-    before you begin your home buying journey. The calculator aims to provide
-    you with a rough estimate for the amount you should aspire to have
-    saved and expect to need for buying a home matching those parameters.
-    Keep in mind this amount is just a recommendation based on the assumption
-    of the down payment percent you provided and 3% closing cost fees or any 
-    other fees that you decide to add. For a more detailed breakdown as to 
-    what kind of monthly payment you should expect, and potential
-    loans to consider based on the information provided see the Financing
-    page.`,
+    description: `Houses are expensive and the total cost of purchasing a home goes well beyond the inital sticker price of 200k, 400k, etc. On the right we have a wizard that will walk through the required pieces of info that we recommend you have in mind before you begin your home buying journey. 
+    
+    The calculator aims to provide you with a rough estimate for the amount you should aspire to have saved and expect to need for buying a home matching those parameters. Keep in mind this amount is just a recommendation based on the assumption of the down payment percent you provided and 3% closing cost fees or any other fees that you decide to add. 
+    
+    For a more detailed breakdown as to what kind of monthly payment you should expect, and potential loans to consider based on the information provided see the Financing page.`,
     icon: <AssignmentIcon style={{ color: '#2e7d32' }} />,
   },
-
   {
     label: 'The Homebuying Roadmap',
-    description: `Before you look at houses, you need to understand the sequence. Skipping steps often leads to heartbreak and lost deposits.
-    Check Your Credit: High scores unlock lower interest rates.
-    Get Pre-Approved: This proves to sellers you are a serious buyer.
-    Find an Agent: A buyer’s agent usually costs you $0 but saves you thousands.
-    Define Your Needs: List your "must-haves" vs. "nice-to-haves" (e.g., yard vs. office).`,
+    description: `Before you start touring houses, understand the sequence — skipping steps often leads to heartbreak and lost deposits.
+
+1. Check Your Credit: Higher scores unlock significantly lower interest rates.
+2. Get Pre-Approved: Shows sellers you're a serious buyer and sets your real budget.
+3. Find an Agent: A buyer's agent typically costs you nothing but can save you thousands.
+4. Define Your Needs: Separate your must-haves from your nice-to-haves before you fall in love with a place.`,
     icon: <HomeIcon style={{ color: '#2e7d32' }} />,
   },
   {
     label: 'Your Document Checklist',
-    description: `You will need to prove your financial history to lenders. Start gathering these digital or physical copies now to speed up your application.
-    Proof of Income: Last two years of W-2s and recent pay stubs.
-    Tax Returns: Typically the last two years of federal filings.
-    Bank Statements: 60 days of history for all checking/savings accounts.
-    ID & Social Security: Valid driver’s license or passport.`,
+    description: `Lenders will want to verify your financial history. Start pulling these together now so you're not scrambling later:
+
+• Proof of Income: Last two years of W-2s and your most recent pay stubs.
+• Tax Returns: Federal filings for the past two years.
+• Bank Statements: 60 days of history for all checking and savings accounts.
+• ID & Social Security: A valid driver's license or passport.`,
     icon: <Description style={{ color: '#2e7d32' }} />,
   },
   {
     label: 'Common Pitfalls to Avoid',
-    description: `Many first-time buyers make mistakes in the "getting started" phase that hurt their chances later.
-    Opening New Credit: Do not buy a new car or apply for credit cards now.
-    Changing Jobs: Lenders look for 2+ years of consistent employment.
-    Draining Savings: Ensure you have an "emergency fund" left after the down payment.
-    Ignoring Location: You can change the kitchen, but you can't change the neighborhood.`,
+    description: `Small mistakes early in the process can cost you big later. Watch out for these:
+
+• Opening New Credit: No new car loans or credit cards — lenders will notice.
+• Changing Jobs: Lenders want to see 2+ years of consistent employment history.
+• Draining Savings: Keep an emergency fund in reserve beyond your down payment.
+• Ignoring Location: You can renovate a kitchen, but you can't move the neighborhood.`,
     icon: <PanTool style={{ color: '#2e7d32' }} />,
   },
   {
     label: 'Next Steps',
-    description: `Once you have completed the Wizard on this page, you are ready for the deep dive.
-      Review your Pre-Calculated Summary.
-      Navigate to the Financing Page.
-      Compare Purchasing Methods based on your specific score and savings.`,
+    description: `Once you've worked through the calculator on this page, you're ready to go deeper.
+
+• Review your savings target in the summary above.
+• Head to the Financing page to explore loan types and monthly payment estimates.
+• Compare purchasing methods based on your credit score and savings.`,
     icon: <ArrowForward style={{ color: '#2e7d32' }} />,
+    isLast: true,
   },
 ];
 
 function GettingStarted() {
-  const [activeStep, setActiveStep] = useState(0);
-//idk someone make this sound less stupid
-  return (
-    <div>
-      <Box sx={{ maxWidth: 800, mx: 'auto', p: 3 }}>
-        <Typography variant="h3" gutterBottom sx={{ fontWeight: 'bold' }}>
-          Let's get you home.
-        </Typography>
-        <Typography variant="h6" color="text.secondary" sx={{ mb: 4 }}>
-          The process is a marathon, not a sprint. Follow these steps to start strong.
-        </Typography>
+  const [expandedStep, setExpandedStep] = useState(0);
+  const navigate = useNavigate();
 
-        <Stepper activeStep={activeStep} orientation="vertical">
+  const handleStepClick = (index) => {
+    setExpandedStep(index === expandedStep ? -1 : index);
+  };
+
+  const handleNext = () => {
+    setExpandedStep((prev) => Math.min(prev + 1, steps.length - 1));
+  };
+
+  const handleBack = () => {
+    setExpandedStep((prev) => Math.max(prev - 1, 0));
+  };
+
+  return (
+    <Box sx={{ display: 'flex', gap: 4, alignItems: 'flex-start', p: 3 }}>
+      {/* Left: Stepper */}
+      <Box sx={{ flex: 1, minWidth: 0 }}>
+
+        {/* Intro block */}
+        <Box sx={{ mb: 5 }}>
+          <Typography variant="h3" sx={{ fontWeight: 700, color: grey[900], lineHeight: 1.15, mb: 1.5 }}>
+            Your first steps to homeownership
+          </Typography>
+          <Typography variant="h6" sx={{ color: grey[600], fontWeight: 400 }}>
+            Buying a home is one of the biggest financial decisions you'll make.
+            Work through each step below — and use the calculator on the right to
+            set your savings target before you dive in.
+          </Typography>
+        </Box>
+
+        <Stepper activeStep={-1} nonLinear orientation="vertical">
           {steps.map((step, index) => (
-            <Step key={step.label}>
+            <Step key={step.label} expanded={expandedStep === index}>
               <StepLabel
                 icon={step.icon}
-                onClick={() => setActiveStep(index)}
-                style={{ cursor: 'pointer' }}
+                onClick={() => handleStepClick(index)}
+                sx={{ cursor: 'pointer', userSelect: 'none' }}
               >
-                <Typography variant="h6">{step.label}</Typography>
+                <Typography variant="h5" sx={{ fontWeight: 700, color: grey[900], lineHeight: 1.2 }}>
+                  {step.label}
+                </Typography>
               </StepLabel>
+
               <StepContent>
-                <Card variant="outlined" sx={{ mb: 2, bgcolor: '#f9f9f9' }}>
-                  <CardContent>
-                    <Typography>{step.description}</Typography>
-                  </CardContent>
-                </Card>
-                <Box sx={{ mb: 2 }}>
+                <Box sx={{ mt: 1, mb: 2, pl: 0.5 }}>
+                  <Typography variant="body2" sx={{ color: grey[800], lineHeight: 1.7, whiteSpace: 'pre-line', fontSize: '1rem' }}>
+                    {step.description}
+                  </Typography>
+
+                  {/* CTA on the last step */}
+                  {step.isLast}
+                </Box>
+
+                {/* Navigation buttons */}
+                <Stack direction="row" spacing={1} sx={{ mb: 1 }}>
                   <Button
                     variant="contained"
-                    onClick={() => setActiveStep((prev) => prev + 1)}
-                    sx={{ mt: 1, mr: 1, backgroundColor: '#2e7d32', }}
+                    onClick={handleNext}
+                    disabled={index === steps.length - 1}
+                    size="small"
+                    sx={{ color: 'white', bgcolor: green[700], '&:hover': { bgcolor: green[900] } }}
                   >
-                    {index === steps.length - 1 ? 'Finish' : 'Next Step'}
+                    Continue
                   </Button>
-                </Box>
+                  <Button
+                    onClick={handleBack}
+                    disabled={index === 0}
+                    size="small"
+                    sx={{ color: green[800] }}
+                  >
+                    Back
+                  </Button>
+                </Stack>
               </StepContent>
             </Step>
           ))}
         </Stepper>
-        {/* useless?
-        {activeStep === steps.length && (
-          <Paper square elevation={0} sx={{ p: 3, mt: 3, bgcolor: '#000000ff' }}>
-            <Typography>Ready to run the numbers?</Typography>
-            <Button variant="contained" color="secondary" sx={{ mt: 2 }}>
-              Try the Mortgage Calculator
-            </Button>
-          </Paper>
-        )} */}
       </Box>
+
+      {/* Right: Calculator */}
+      <Box
+        sx={{
+          width: 380,
+          flexShrink: 0,
+          position: 'sticky',
+          top: 24,
+          alignSelf: 'flex-start',
+        }}
+      >
       <HomeSavingsCalculator />
-    </div>
+      </Box>
+    </Box>
   );
 }
 
