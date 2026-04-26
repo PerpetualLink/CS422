@@ -1,0 +1,18 @@
+.MuiLinearProgress-root {
+    border-radius: 999px;
+    height: 16px !important;
+    background-color: lightgrey !important;
+
+}
+
+.MuiLinearProgress-bar1 {
+    &.bad {
+        background-color: #E5484D;
+    }
+    &.close {
+        background-color: #F5A524;
+    }
+    &.good {
+        background-color: #22C55E;
+    }
+}

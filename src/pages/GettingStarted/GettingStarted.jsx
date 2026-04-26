@@ -111,21 +111,45 @@ const steps = [
   },
   {
     label: 'Common Pitfalls to Avoid',
-    description: `Small mistakes early in the process can cost you big later. Watch out for these:
- 
-• Opening New Credit: No new car loans or credit cards — lenders will notice.
-• Changing Jobs: Lenders want to see 2+ years of consistent employment history.
-• Draining Savings: Keep an emergency fund in reserve beyond your down payment.
-• Ignoring Location: You can renovate a kitchen, but you can't move the neighborhood.`,
+    description: (
+      <div style={{ display: "flex", flexDirection: "column", gap: 8 }}>
+        <Typography>
+          Avoiding these mistakes early can save you from serious headaches — or losing a deal entirely.
+        </Typography>
+        <Typography>
+          • <strong>Opening New Credit:</strong> A new line of credit changes your {<GlossaryTerm term={"Debt-to-Income Ratio"}>debt-to-income</GlossaryTerm>} ratio and can disqualify you mid-process, even after pre-approval.
+        </Typography>
+        <Typography>
+          • <strong>Changing Jobs:</strong> Lenders want two or more years of consistent employment in the same field. Switching jobs — even for more money — can defer or put your application at risk.
+        </Typography>
+        <Typography>
+          • <strong>Draining Savings:</strong> Your down payment isn't the finish line. You'll still need cash for closing costs, moving expenses, and a post-move emergency fund.
+        </Typography>
+        <Typography>
+          • <strong>Ignoring Location:</strong> A bad neighborhood, long commute, or poor school district will outlast any renovation. Visit at different times of day before you commit.
+        </Typography>
+      </div>
+    ),
     icon: <PanTool style={{ color: '#2e7d32' }} />,
   },
   {
     label: 'Next Steps',
-    description: `Once you've worked through the calculator on this page, you're ready to go deeper.
- 
-• Review your savings target in the summary above.
-• Head to the Financing page to explore loan types and monthly payment estimates.
-• Compare purchasing methods based on your credit score and savings.`,
+    description: (
+      <div style={{ display: "flex", flexDirection: "column", gap: 8 }}>
+        <Typography>
+          Once you've worked through the calculator on this page, you're ready to go deeper.
+        </Typography>
+        <Typography>
+          • <strong>Head to the Financing page</strong> to explore loan types and monthly payment estimates.
+        </Typography>
+        <Typography>
+          • <strong>Compare purchasing methods</strong> based on your credit score and savings.
+        </Typography>
+        <Typography>
+          • <strong>Explore various hidden costs</strong> that may come up during your journey.
+        </Typography>
+      </div>
+    ),
     icon: <ArrowForward style={{ color: '#2e7d32' }} />,
   },
 ];
@@ -172,7 +196,7 @@ function GettingStarted() {
           width: 440,
           flexShrink: 0,
           position: 'sticky',
-          top: 24,
+          top: "calc(50% - 375px)",
           alignSelf: 'flex-start',
         }}
       >

@@ -1,7 +1,9 @@
-import { useState, useCallback } from "react";
+import { useState, useCallback, useEffect } from "react";
 import { useBuyerProfile } from "./BuyerProfileContext";
 import { Button, Checkbox, FormControl, FormControlLabel, FormLabel, InputAdornment, InputLabel, LinearProgress, OutlinedInput, Radio, RadioGroup, Typography } from "@mui/material";
 import GlossaryTerm from "../pages/BuyingOptions/GlossaryTerm";
+import "./HomeSavingsCalculator.scss";
+import { PieChart } from "@mui/x-charts";
 
 function fmt(value) {
   return value.toLocaleString("en-US", { style: "currency", currency: "USD", maximumFractionDigits: 0 });
@@ -15,20 +17,56 @@ export default function HomeSavingsCalculator({ onClose, isDraggable = true }) {
 
   const downPayment = homePrice * (downPercent / 100);
   const closingCosts = homePrice * 0.03;
-  const pmiBuffer = pmi ? 2000 : 0;
+  const pmiBuffer = pmi ? homePrice * 0.015 : 0;
   const recommendedSavings = downPayment + closingCosts + 5000 + pmiBuffer;
   const percent = Math.min(saved / homePrice, 1) * 100;
   const targetPercent = (recommendedSavings / homePrice) * 100;
 
   const ratio = saved / recommendedSavings;
-  const barColor = ratio < 0.5 ? "#E5484D" : ratio < 1 ? "#F5A524" : "#22C55E";
+  const barColor = "good";
+
+  const [data, setData] = useState([
+    { id: 0, label: 'Closing Costs', value: homePrice * 0.03, color: '#00C49F' },
+    { id: 1, label: 'Down Payment', value: downPayment, color: '#0088FE' },
+    { id: 2, label: 'Moving Buffer', value: 5000, color: '#FFD54F' },
+  ]);
+
+  useEffect(() => {
+    let newData = [...data];
+
+    newData[0].value = homePrice * 0.03;
+    newData[1].value = downPayment;
+
+    if (pmi) {
+      if (newData.filter((item) => item.id === 3).length === 0) {
+        newData.push({ id: 3, label: 'PMI', value: pmiBuffer, color: '#E57373' });
+      }
+    }
+    else {
+      newData = newData.filter((item) => item.id !== 3);
+    }
+
+    setData(newData);
+  }, [downPayment, homePrice, pmi]);
+
+  const settings = {
+    margin: { right: 5 },
+    width: 250,
+    height: 250,
+  };
+
+  const currencyFormatter = new Intl.NumberFormat('en-US', {
+    style: 'currency',
+    currency: 'USD',
+    minimumFractionDigits: 0,
+  });
 
   const styles = {
   arrowDown: { borderLeft: "7px solid transparent", borderRight: "7px solid transparent", borderTop: "7px solid #000", height: 0, marginLeft: "-5.5px", width: 0 },
   arrowUp: { borderBottom: "7px solid #000", borderLeft: "7px solid transparent", borderRight: "7px solid transparent", height: 0, marginLeft: "-5.5px", width: 0 },
   currentLabel: { left: `calc(392px * ${percent / 100})`, position: "relative", width: "fit-content" },
-  goalLine: { background: "black", height: "16px", left: `calc(392px * ${(targetPercent > 100) ? 1 : targetPercent / 100})`, marginTop: "-31px", position: "relative", width: "2px" },
-  goalLabels: { display: "flex", fontFamily: "Roboto, san-serif", fontSize: 12, justifyContent: "space-between", margin: "0 -10px 0" },
+  goalLine: { background: "black", height: "16px", left: `calc(392px * ${(targetPercent > 100) ? 1 : targetPercent / 100})`, marginTop: "-33.5px", position: "relative", width: "2px" },
+  goalLabels: { display: "flex", fontFamily: "Roboto, san-serif", fontSize: "0.9rem", justifyContent: "space-between", margin: "0 -10px 0" },
   label: { fontFamily: "Roboto, san-serif", fontSize: 14, marginTop: 10 },
   targetLabel: { left: `calc(392px * ${(targetPercent > 100) ? 1 : targetPercent / 100})`, position: "relative", top: "15px" },
   title: { fontSize: "1.2rem", fontWeight: "bold", textAlign: "center" },
@@ -44,13 +82,13 @@ export default function HomeSavingsCalculator({ onClose, isDraggable = true }) {
           </Typography>
           <div style={{ padding: "24px", marginBottom: "12px" }}>
             <LinearProgress
-              sx={{
-                borderRadius: "999px",
-                height: "16px",
+              classes={{
+                bar1: barColor
               }}
               value={percent}
               variant={"determinate"}
             />
+            <div style={{}}>{`${(saved/recommendedSavings * 100).toFixed(0)}% of Goal`}</div>
             <div style={styles.goalLabels}><span>{"$0"}</span><span>{fmt(homePrice)}</span></div>
             <div
               style={styles.goalLine}
@@ -63,12 +101,12 @@ export default function HomeSavingsCalculator({ onClose, isDraggable = true }) {
                   marginLeft: "-50px"
                 }}
               >
-                {`Recommended: ${fmt(recommendedSavings)}`}
+                {`Goal: ${fmt(recommendedSavings)}`}
               </div>
             </div>
           </div>
 
-          <FormControl fullWidth sx={{ marginBottom: "16px"}}>
+          <FormControl sx={{ margin: "0 4px 16px 0", width: "calc(50% - 8px)"}}>
             <InputLabel sx={{ fontWeight: "bold"}}>
               {"Amount Saved"}
             </InputLabel>
@@ -82,7 +120,7 @@ export default function HomeSavingsCalculator({ onClose, isDraggable = true }) {
             />
           </FormControl>
 
-          <FormControl fullWidth sx={{ marginBottom: "16px"}}>
+          <FormControl sx={{ margin: "0 0 16px 4px", width: "calc(50% - 8px)"}}>
             <InputLabel sx={{ fontWeight: "bold"}}>
               {"House Price"}
             </InputLabel>
@@ -96,7 +134,7 @@ export default function HomeSavingsCalculator({ onClose, isDraggable = true }) {
             />
           </FormControl>
 
-          <FormControl sx={{ margin: "0 16px 16px 0", width: "122px"}}>
+          <FormControl sx={{ margin: "0 16px 16px 0", flexDirection: "row", gap: 2 }}>
             <InputLabel sx={{ fontWeight: "bold"}}>
               {"Down Payment %"}
             </InputLabel>
@@ -106,60 +144,70 @@ export default function HomeSavingsCalculator({ onClose, isDraggable = true }) {
               label="Down Payment %"
               type={"number"}
               onChange={(e) => {
-                if (e.target.value <= 100 && e.target.value >= 0) {
-                  updateProfile({ downPercent: Number(e.target.value) })
+                if (e.target.value <= 100) {
+                  updateProfile({
+                    downPercent: Number(e.target.value),
+                    pmi: e.target.value < 20
+                  })
                 }
               }}
+              sx={{ width: "122px" }}
               value={downPercent}
-              inputProps={{ min: 0, max: 100 }}
+              inputProps={{ max: 100 }}
             />
-          </FormControl>
-
-          <FormControl sx={{ margin: "0 16px 16px 0", width: "100px" }}>
-            <InputLabel sx={{ fontWeight: "bold"}}>
-              {"Credit Score"}
-            </InputLabel>
-            <OutlinedInput
-              id="outlined-adornment-amount"
-              label="Credit Score"
-              inputProps={{ min: 300, max: 850 }}
+            <RadioGroup
+              aria-labelledby="demo-radio-buttons-group-label"
+              value={downPercent}
+              name="radio-buttons-group"              
               onChange={(e) => {
-                if (e.target.value >= 0 && e.target.value <= 850) {
-                  updateProfile({ creditScore: Number(e.target.value) })
+                if (e.target.value <= 100) {
+                  updateProfile({
+                    downPercent: Number(e.target.value),
+                    pmi: e.target.value < 20
+                  })
                 }
               }}
-              type={"number"}
-              value={creditScore}
-            />
+              style={{ display: "flex", flexDirection: "row" }}
+            >
+              <FormControlLabel value={3.5} control={<Radio />} label="3.5%" />
+              <FormControlLabel value={10} control={<Radio />} label="10%" />
+              <FormControlLabel value={20} control={<Radio />} label="20%" />
+            </RadioGroup>
           </FormControl>
-
-          <FormControl>
+          <FormControl sx={{ position: "absolute", top: "325px", left: "20px"}}>
             <FormLabel id="demo-radio-buttons-group-label"><GlossaryTerm term={"PMI"}>PMI</GlossaryTerm> Required?</FormLabel>
             <RadioGroup
               aria-labelledby="demo-radio-buttons-group-label"
-              defaultValue={false}
+              value={pmi}
               name="radio-buttons-group"              
-              onChange={(e) => updateProfile({ pmi: e.target.value === "true" })}
-              style={{ display: "flex", flexDirection: "row" }}
+              style={{ display: "flex", flexDirection: "column" }}
             >
-              <FormControlLabel value={true} control={<Radio />} label="Yes" />
-              <FormControlLabel value={false} control={<Radio />} label="No" />
+              <FormControlLabel disabled={!pmi} value={true} control={<Radio />} label="Yes" />
+              <FormControlLabel disabled={pmi} value={false} control={<Radio />} label="No" />
             </RadioGroup>
           </FormControl>
         </div>
 
         <div>
           <div style={{ marginTop: 4, marginBottom: 12, borderTop: "1px solid #eee" }} />
-
-          <div style={{ fontFamily: "Roboto, san-serif", fontSize: 14, lineHeight: "22px" }}>
-            <p>Down Payment: {fmt(downPayment)}</p>
-            <p>Closing Costs (~3%): {fmt(closingCosts)}</p>
-            <p>Moving / Repair Buffer: {fmt(5000)}</p>
-            {pmi && <p>PMI Cushion: {fmt(pmiBuffer)}</p>}
-          </div>
-
-          <div style={{ fontFamily: "Roboto", marginTop: 16, fontWeight: 600, fontSize: 16 }}>
-            Recommended Savings:
+          <PieChart
+            series={[{
+              innerRadius: 50,
+              outerRadius: 120,
+              data,
+              paddingAngle: 2,
+              arcLabel: (item) => currencyFormatter.format(item.value),
+              valueFormatter: (item) => currencyFormatter.format(item.value)
+           }]}
+            {...settings}
+            sx={{
+              fontFamily: "Roboto, san-serif",
+              margin: "38px 0 0 70px"
+            }}
+            
+          />
+          <div style={{ fontFamily: "Roboto", marginTop: 16, fontWeight: 600, fontSize: 16, textAlign: "center" }}>
+            Total Cash Needed:
             <span style={{ display: "block", fontSize: 24, marginTop: 4 }}>
               {fmt(recommendedSavings)}
             </span>
