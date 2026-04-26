@@ -19,7 +19,14 @@ function Glossary() {
             const newWordList = keywords.filter((word) => word.TERM.toLowerCase().includes(searchWord.toLowerCase()));
 
             if (newWordList.length > 0) {
-                setWordList(newWordList);
+                if (wordList.length === newWordList.length) {
+                    if (!wordList.every((item, index) => item.TERM === newWordList[index].TERM)) {
+                        setWordList(newWordList);
+                    }
+                }
+                else {
+                    setWordList(newWordList);
+                }
             }
         }
         else if (wordList !== keywords) {
@@ -106,12 +113,12 @@ function Glossary() {
                     variant={"outlined"}
                 />
                 <Box sx={{
-                    padding: "8px 24px 24px",
+                    padding: "8px 0 24px 24px",
                     overflowY: "auto",
                     flex: 1
                 }}>
                     {wordList.map((item, index) => (
-                        <Box key={index} sx={{ marginBottom: "24px" }}>
+                        <Box key={index} sx={{ marginBottom: "24px", width: 350 }}>
                             <Typography variant="h6" sx={{ 
                                 fontWeight: "bold", 
                                 color: "#43A047", 
@@ -125,6 +132,14 @@ function Glossary() {
                             }}>
                                 {item.DEFINITION}
                             </Typography>
+                            {item?.EXTRA_DEFINITION && 
+                                <Typography variant="body2" sx={{ 
+                                    color: "#555", 
+                                    lineHeight: 1.6 
+                                }}>
+                                    {item.EXTRA_DEFINITION}
+                                </Typography>
+                            }
                         </Box>
                     ))}
                 </Box>

@@ -1,5 +1,17 @@
 export const keywords = [
     {
+        TERM: "Amortization",
+        DEFINITION: `The process of spreading out a loan into a series of fixed, regular payments over time, where each payment covers both principal and interest. 
+        This breaks the loan plus interest into fixed monthly payments rather than needing to account for the changes in the principal and interest over the course of the loan.`,
+        EXTRA_DEFINITION: `The formula is as follows:                                                   
+        [M = P * r * ((1+r)^n / ((1+r)^n - 1))].                                   
+                                                                                                                                                        
+        M = Monthly Payment                                                          
+        P = Loan Amount (Principal)                                               
+        r = monthly interest rate (Interest Rate / 12)                   
+        n = Total number of payments `
+    },
+    {
         TERM: "Appraisal Fee",
         DEFINITION: "A professional estimation of the home's market value, often ordered by the lender to ensure the home is worth the loan amount."
     },
@@ -46,6 +58,10 @@ export const keywords = [
     {
         TERM: "Interest",
         DEFINITION: "Mortgage loans alway come with an interest rate. This can greatly affect how much you are paying for the purchase in the long run. The national average is around 6% annually which is what we used in our monthly calculation."
+    },
+    {
+        TERM: "Loan Principal",
+        DEFINITION: "The payment that ultimately ends up going towards the loan. Due to how mortgages are set up via amortization. This value starts out small intiially and becomes a larger portion of the repayment later on in the life of a mortgage."
     },
     {
         TERM: "Private Mortgage Insurance (PMI)",

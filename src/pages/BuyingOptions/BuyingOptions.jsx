@@ -1,6 +1,6 @@
 import { useMemo, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { amber, green, grey } from "@mui/material/colors";
+import { amber, green, grey, red } from "@mui/material/colors";
 import { Box, Button, Card, CardContent, Collapse, Divider, Stack, Tooltip, Typography} from "@mui/material";
 import { AccountBalanceWallet, CheckCircleOutline, Edit, ExpandMore, ExpandLess, Home, TrendingFlat, WarningAmber } from "@mui/icons-material";
 import { useBuyerProfile } from "../../shared/BuyerProfileContext";
@@ -28,16 +28,11 @@ function BuyingOptions() {
     const avgPmiCost = (downPercent < 20 ) ? profile.homePrice * (0.01 / 12) : 0; // If less than 20% down payment then it's required, but if not then it is generally about 1% annually.
     const avgPropertyTax = profile.homePrice * (0.011 / 12) // 1.1% is the low national average for annual tax rate.
     const avgHomeInsurance = 2400 / 12; // 2400 per year is the national average
-    const downPaymentDiff = profile.homePrice * ((100 - downPercent) / 100); // Calculate remaining home price which would then be the theoretical loan amount.
+    const loanAmount = profile.homePrice * ((100 - downPercent) / 100); // Calculate remaining home price which would then be the theoretical loan amount.
     const avgLoanInterestRate = 0.06 / 12 // average mortgage regardless of FHA or Conventional is around 6% annually
-    const estMonthly = Math.round(downPaymentDiff * avgLoanInterestRate + avgPmiCost + avgPropertyTax + avgHomeInsurance);
+    const amortizationCalc = loanAmount * avgLoanInterestRate * (Math.pow((1 + avgLoanInterestRate), 360) / (Math.pow((1 + avgLoanInterestRate), 360) - 1));
+    const estMonthly = Math.round(amortizationCalc + avgPmiCost + avgPropertyTax + avgHomeInsurance);
     const method = methodMeta[recommendation.method];
-    
-    console.log(downPaymentDiff)
-    console.log(avgLoanInterestRate)
-    console.log(avgPmiCost)
-    console.log(avgPropertyTax)
-    console.log(avgHomeInsurance)
 
     const typographyStling = {
         fontSize: "1rem"
@@ -109,18 +104,18 @@ function BuyingOptions() {
                         <Typography variant="overline" sx={{ color: grey[600], fontSize: "1rem", fontWeight: 600, letterSpacing: 2, mb: 2, display: "block" }}>
                             What this looks like for you
                         </Typography>
-                        <Stack direction={{ xs: "column", sm: "row" }} spacing={3} divider={<Divider orientation="vertical" flexItem />}>
+                        <Stack direction={{ xs: "column", sm: "row" }} spacing={3} divider={<Divider orientation="vertical" flexItem />} >
                             <NumberStat
                                 label="Down payment"
                                 value={fmt(downPayment)}
-                                caption={<Typography variant="caption" sx={{ color: grey[600], flexGrow: 1 }}>{`${downPercent}% of target price `}</Typography>}
+                                caption={<Typography variant="caption" sx={{ color: grey[600], flexGrow: 1 }}>{`${downPercent}% of home price `}</Typography>}
                                 onToggle={setUseCustom}
                                 toggle={true}
                             />
                             <NumberStat
-                                label="You have"
+                                label="You Saved"
                                 value={fmt(profile.saved)}
-                                valueColor={green[700]}
+                                valueColor={(profile.saved < downPayment) ? red[700] : green[700]}
                                 caption={
                                     <Stack direction="row" spacing={0.5} alignItems="center">
                                         {profile.saved >= downPayment ? (
@@ -140,12 +135,17 @@ function BuyingOptions() {
                             <NumberStat
                                 label="Est. monthly payment"
                                 value={`~${fmt(estMonthly)}`}
-                                caption={<Typography variant="caption" sx={{ color: grey[600] }}>incl. <GlossaryTerm term="PMI" />, <GlossaryTerm term="Property Taxes" />, <GlossaryTerm term="Interest" />, <GlossaryTerm term="Homeowner Insurance" /></Typography>}
+                                caption={<Typography variant="caption" sx={{ color: grey[600] }}>incl. <GlossaryTerm term="Amortization" />, <GlossaryTerm term="PMI" />, <GlossaryTerm term="Property Taxes" />, <GlossaryTerm term="Homeowner Insurance" /></Typography>}
                             />
                             <NumberStat
-                                label="Time to close"
+                                label="Average Time to close"
                                 value={method.timeToClose}
                                 caption={<Typography variant="caption" sx={{ color: grey[600] }}>{recommendation.method} typical</Typography>}
+                            />
+                            <NumberStat
+                                label="Total Cost of Loan"
+                                value={`${fmt(amortizationCalc * 360)}`}
+                                caption={<Typography variant="caption" sx={{ color: grey[600] }}>{"For a 30 year mortgage at 6% interest"}</Typography>}
                             />
                         </Stack>
                     </Box>

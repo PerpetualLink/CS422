@@ -1,6 +1,7 @@
 import { useState, useCallback } from "react";
 import { useBuyerProfile } from "./BuyerProfileContext";
 import { Button, Checkbox, FormControl, FormControlLabel, FormLabel, InputAdornment, InputLabel, LinearProgress, OutlinedInput, Radio, RadioGroup, Typography } from "@mui/material";
+import GlossaryTerm from "../pages/BuyingOptions/GlossaryTerm";
 
 function fmt(value) {
   return value.toLocaleString("en-US", { style: "currency", currency: "USD", maximumFractionDigits: 0 });
@@ -154,6 +155,7 @@ export default function HomeSavingsCalculator({ onClose, isDraggable = true }) {
             <OutlinedInput
               id="outlined-adornment-amount"
               label="Credit Score"
+              inputProps={{ min: 300, max: 850 }}
               onChange={(e) => {
                 if (e.target.value >= 0 && e.target.value <= 850) {
                   updateProfile({ creditScore: Number(e.target.value) })
@@ -165,7 +167,7 @@ export default function HomeSavingsCalculator({ onClose, isDraggable = true }) {
           </FormControl>
 
           <FormControl>
-            <FormLabel id="demo-radio-buttons-group-label">PMI Required?</FormLabel>
+            <FormLabel id="demo-radio-buttons-group-label"><GlossaryTerm term={"PMI"}>PMI</GlossaryTerm> Required?</FormLabel>
             <RadioGroup
               aria-labelledby="demo-radio-buttons-group-label"
               defaultValue={false}

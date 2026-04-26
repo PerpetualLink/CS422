@@ -24,7 +24,7 @@ function ProfileSummary({ profile, updateProfile, editing, setEditing }) {
         const fields = [
             { key: "saved", label: "Saved:", icon: "$", width: 110 },
             { key: "creditScore", label: "Credit:", max: 850, width: 100 },
-            { key: "homePrice", label: "Target:", icon: "$", width: 110 },
+            { key: "homePrice", label: "Home Price:", icon: "$", width: 110 },
             { key: "downPercent", label: "Down Payment:", end: true, icon: "%", max: 100, width: 110 },
         ];
         return (
@@ -73,7 +73,7 @@ function ProfileSummary({ profile, updateProfile, editing, setEditing }) {
             <Box sx={{ color: grey[400] }}>•</Box>
             <Typography sx={typographyStyling}>Credit <strong>{profile.creditScore}</strong></Typography>
             <Box sx={{ color: grey[400] }}>•</Box>
-            <Typography sx={typographyStyling}>Target <strong>{fmt(profile.homePrice)}</strong></Typography>
+            <Typography sx={typographyStyling}>Home Price: <strong>{fmt(profile.homePrice)}</strong></Typography>
             <Box sx={{ color: grey[400] }}>•</Box>
             <Typography sx={typographyStyling}>Down Payment <strong>{(profile.downPercent)}%</strong></Typography>
         </Stack>
