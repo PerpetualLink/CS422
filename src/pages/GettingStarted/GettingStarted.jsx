@@ -12,6 +12,7 @@ import HomeSavingsCalculator from '../../shared/HomeSavingsCalculator';
 import GlossaryTerm from '../BuyingOptions/GlossaryTerm';
 import { Link } from 'react-router-dom';
 import { pages } from '../../shared/navigation';
+import "./GettingStarted.scss";
  
 const steps = [
   {
@@ -156,7 +157,7 @@ const steps = [
  
 function GettingStarted() {
   return (
-    <Box sx={{ display: 'flex', gap: 4, alignItems: 'flex-start', p: 3, width: "1500px", margin: "auto auto", padding: "32px 24px" }}>
+    <Box className={"mainPage"} sx={{ display: 'flex', gap: 4, alignItems: 'flex-start', p: 3, width: "1500px", margin: "auto auto", padding: "32px 24px" }}>
       {/* Left: Stepper */}
       <Box sx={{ flex: 1, minWidth: 0 }}>
  
@@ -192,6 +193,7 @@ function GettingStarted() {
  
       {/* Right: Calculator */}
       <Box
+        className={"rightContainer"}
         sx={{
           width: 440,
           flexShrink: 0,

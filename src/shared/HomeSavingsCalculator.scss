@@ -16,3 +16,13 @@
         background-color: #22C55E;
     }
 }
+
+@media screen and (max-width: 1650px) {
+    div.calculator {
+        position: absolute !important;
+    }
+
+    div.container {
+        scale: 0.75;
+    }
+}

@@ -109,7 +109,7 @@ function BuyingOptions() {
                     )}
                 </Box>
 
-                <CardContent sx={{ p: 5 }}>
+                <CardContent sx={{ padding: "24px 40px" }}>
                     <Typography variant="overline" sx={{ color: grey[600], fontSize: "1rem", fontWeight: 600, letterSpacing: 2 }}>
                         Our recommendation
                     </Typography>
@@ -143,6 +143,7 @@ function BuyingOptions() {
                                 value={fmt(downPayment)}
                                 caption={<Typography variant="caption" sx={{ color: grey[600], flexGrow: 1 }}>{`${downPercent}% of home price `}</Typography>}
                                 onToggle={setUseCustom}
+                                method={method}
                                 toggle={true}
                             />
                             <NumberStat

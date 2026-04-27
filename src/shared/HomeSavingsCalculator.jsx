@@ -105,8 +105,8 @@ export default function HomeSavingsCalculator({ onClose, isDraggable = true }) {
 };
 
   return (
-    <div>
-      <div style={styles.wrapper}>
+    <div className={"container"}>
+      <div className={"calculator"} style={styles.wrapper}>
         <div style={styles.editContainer}>
           <Typography style={styles.title}>
             {"Savings Calculator"}

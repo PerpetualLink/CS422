@@ -12,6 +12,10 @@ $amber-700: #ffa000;
 
 .financingContainer {
     max-width: 1500px;
+    @media screen and (max-width: 1650px) {
+        max-width: 1200px;
+        padding-top: 12px !important;
+    }
     margin: 0 auto;
     padding: 32px 24px;
 

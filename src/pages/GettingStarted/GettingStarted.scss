@@ -1,0 +1,10 @@
+@media screen and (max-width: 1650px) {
+    Div.rightContainer {
+        top: calc(50% - 300px);
+    }
+
+    Div.mainPage {
+        max-width: 1200px !important;
+        padding-top: 12px;
+    }
+}

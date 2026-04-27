@@ -1,14 +1,23 @@
 import { Box, Switch, ToggleButton, ToggleButtonGroup, Typography } from "@mui/material";
 import "./NumberStat.scss";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
-function NumberStat({ altCaption, altValue, label, value, valueColor, caption, onToggle, toggle }) {
+function NumberStat({ altCaption, altValue, label, value, valueColor, method, caption, onToggle, toggle }) {
     const [isOn, setIsOn] = useState(true);
 
     const handleToggle = () => {
         setIsOn((prev) => !prev);
         onToggle((prev) => !prev);
     }
+
+    useEffect(() => {
+        if (!method?.label.includes("FHA")) {
+            setIsOn(false);
+        }
+        else {
+            setIsOn(true);
+        }
+    }, [method])
 
     return (
         <Box sx={{ flex: 1 }}>
