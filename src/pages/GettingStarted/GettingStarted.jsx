@@ -59,7 +59,10 @@ const steps = [
         • <strong>Ownership Overhead:</strong> Recurring {<GlossaryTerm term={"Property Taxes"}>{"Property Taxes"}</GlossaryTerm>}, {<GlossaryTerm term={"Homeowner Insurance"}>{"insurance"}</GlossaryTerm>}
       </Typography>
       <Typography>
-        Understanding these numbers upfront prevents "sticker shock" later. To see exactly how interest, taxes, and insurance impact your monthly budget, use our interactive tool on the right.
+        Understanding these numbers upfront prevents "sticker shock" later. For a rough estimate of what you should expect to pay, and how you stack up with your current savings you can use our interactive tool to the right to begin putting a plan together.
+      </Typography>
+      <Typography>
+        Afterward you can see how this all breaks down to a monthly payment and the total cost of buying a home on the finanical page.
       </Typography>
     </div>
     ),
