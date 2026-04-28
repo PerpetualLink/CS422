@@ -12,6 +12,7 @@ import {
     Typography,
     styled,
 } from "@mui/material";
+import GlossaryTerm from "./GlossaryTerm";
 
 const StyledCell = styled(TableCell)(() => ({
     [`&.${tableCellClasses.head}`]: {
@@ -65,7 +66,7 @@ function ComparisonTable({ title, description, columns, rows, recommended }) {
                                 const HeaderCell = col === recommended ? HighlightedHeader : StyledCell;
                                 return (
                                     <HeaderCell key={col}>
-                                        {col}
+                                        {<GlossaryTerm term={col}>{col}</GlossaryTerm>}
                                         {col === recommended && (
                                             <Chip
                                                 label="Recommended"

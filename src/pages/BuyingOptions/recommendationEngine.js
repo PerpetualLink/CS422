@@ -8,7 +8,7 @@ export function fmt(value) {
 
 export const methodMeta = {
     FHA: { label: "FHA Loan", timeToClose: "45-60 days" },
-    Traditional: { label: "Conventional Mortgage", timeToClose: "30-45 days" },
+    Conventional: { label: "Conventional Mortgage", timeToClose: "30-45 days" },
     Cash: { label: "Cash Purchase", timeToClose: "7-14 days" },
 };
 
@@ -44,7 +44,7 @@ export function computeRecommendation(profile) {
 
     if (creditScore >= 620 && saved >= conventionalComfortable) {
         return {
-            method: "Traditional",
+            method: "Conventional",
             confidence: "strong",
             reason: `With a ${creditScore} credit score and ${fmt(saved)} saved, you qualify for a conventional mortgage loan and can put down enough to minimize (or avoid) PMI.`,
         };
@@ -80,25 +80,25 @@ export function computePathRecommendation() {
     };
 }
 
-export const methodColumns = ["Traditional", "FHA", "Cash"];
+export const methodColumns = ["Conventional", "FHA", "Cash"];
 
 export const methodRows = [
     {
         label: "Best for",
         isItalic: true,
         values: {
-            Traditional: "Steady income, decent credit, not rushed",
+            Conventional: "Steady income, decent credit, not rushed",
             FHA: "First-time buyers, lower credit, smaller savings",
             Cash: "You have the full amount saved (rare)",
         },
     },
-    { label: "Down payment", values: { Traditional: "3-20%", FHA: "3.5%", Cash: "100%" } },
-    { label: "Credit score", values: { Traditional: "620+", FHA: "580+", Cash: "Not required" } },
-    { label: "Closing speed", values: { Traditional: "30-45 days", FHA: "45-60 days", Cash: "7-14 days" } },
+    { label: "Down payment", values: { Conventional: "3-20%", FHA: "3.5%", Cash: "100%" } },
+    { label: "Credit score", values: { Conventional: "620+", FHA: "580+", Cash: "Not required" } },
+    { label: "Closing speed", values: { Conventional: "30-45 days", FHA: "45-60 days", Cash: "7-14 days" } },
     {
         label: "Ongoing cost",
         values: {
-            Traditional: "Mortgage + possible PMI",
+            Conventional: "Mortgage + possible PMI",
             FHA: "Mortgage + PMI (permanent)",
             Cash: "Just taxes + insurance",
         },
@@ -106,12 +106,12 @@ export const methodRows = [
     {
         label: "Property condition",
         values: {
-            Traditional: "Standard appraisal",
+            Conventional: "Standard appraisal",
             FHA: "Strict — must meet FHA standards",
             Cash: "Buyer's choice",
         },
     },
-    { label: "Barrier to entry", values: { Traditional: "Moderate", FHA: "Low", Cash: "Very high" } },
+    { label: "Barrier to entry", values: { Conventional: "Moderate", FHA: "Low", Cash: "Very high" } },
 ];
 
 export const pathColumns = ["Real Estate Agent", "Tax Auction", "Home Owner"];
