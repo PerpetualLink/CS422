@@ -33,7 +33,7 @@ const steps = [
           • <strong>Creative Control:</strong> It's yours to paint, renovate, and make your own.
         </Typography>
         <Typography>
-          • <strong>Tax Benefits:</strong> You may be able to deduct mortgage interest and property taxes.`,
+          • <strong>Tax Benefits:</strong> You may be able to deduct mortgage interest and property taxes.
         </Typography>
       </div>
     ),
