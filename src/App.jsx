@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Typography } from "@mui/material";
 import "./app.scss";
 import Home from "./pages/Home";
@@ -6,35 +6,16 @@ import GettingStarted from "./pages/GettingStarted";
 import BuyingOptions from "./pages/BuyingOptions";
 import HiddenCosts from "./pages/HiddenCosts";
 import Glossary from "./shared/Glossary";
-import { BuyerProfileProvider } from "./shared/BuyerProfileContext";
-import { BrowserRouter, Link, Route, Routes } from "react-router-dom";
+import { BuyerProfileProvider, useBuyerProfile } from "./shared/BuyerProfileContext";
+import { BrowserRouter, Link, Route, Routes, ScrollRestoration } from "react-router-dom";
 import { pages } from "./shared/navigation";
+import Nav from "./shared/Nav";
 
 function App() {
-    const [currentRoute, setCurrentRoute] = useState(window.location.pathname);
-
     return (
     <BuyerProfileProvider>
         <BrowserRouter>
-            <nav className="navigationBar">
-                <Typography
-                    className="navLogo"
-                >
-                    Foundation Labs
-                </Typography>
-                {pages.map((navItem) => (
-                    <Link
-                        className={`navButton ${(currentRoute === navItem.route) ? "active" : ""}`}
-                        key={navItem.name}
-                        onClick={() => setCurrentRoute(navItem.route)}
-                        to={navItem.route}
-                    >
-                        {navItem.name}
-                    </Link>
-                ))}
-                <Glossary />
-            </nav>
-            
+            <Nav />
             <Routes>
                 <Route path="/CS422/" element={<div className="pageContainer"> <GettingStarted /> </div>} />
                 <Route path="/CS422/Financing" element={<div className="pageContainer"><BuyingOptions /> </div>} />

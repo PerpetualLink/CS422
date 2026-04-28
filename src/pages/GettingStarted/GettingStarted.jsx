@@ -13,6 +13,7 @@ import GlossaryTerm from '../BuyingOptions/GlossaryTerm';
 import { Link } from 'react-router-dom';
 import { pages } from '../../shared/navigation';
 import "./GettingStarted.scss";
+import { useBuyerProfile } from '../../shared/BuyerProfileContext';
  
 const steps = [
   {
@@ -156,6 +157,8 @@ const steps = [
 ];
  
 function GettingStarted() {
+  const { profile, updateProfile } = useBuyerProfile();
+
   return (
     <Box className={"mainPage"} sx={{ display: 'flex', gap: 4, alignItems: 'flex-start', p: 3, width: "1500px", margin: "auto auto", padding: "32px 24px" }}>
       {/* Left: Stepper */}
@@ -189,6 +192,17 @@ function GettingStarted() {
             </Step>
           ))}
         </Stepper>
+          <Link
+            className={"financePageButton"}
+            key={pages[1].name}
+            onClick={() => {
+              updateProfile({ "currentRoute": pages[1].route })
+            }}
+            to={pages[1].route}
+          >
+            <div>{`Go To ${pages[1].name} page`}</div>
+            <ArrowForward sx={{ marginLeft: "8px", height:"44px" }}/>
+          </Link>
       </Box>
  
       {/* Right: Calculator */}

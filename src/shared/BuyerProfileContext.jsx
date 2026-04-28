@@ -1,4 +1,5 @@
 import { createContext, useContext, useState } from "react";
+import { pages } from "./navigation";
 
 // This context lets the Financing page (and anywhere else) read the values
 // the user entered into the HomeSavingsCalculator on the Getting Started page.
@@ -13,7 +14,8 @@ const defaultProfile = {
     pmi: false,
     creditScore: 640,   // not captured in current calculator; used by Financing logic
     timeline: "medium", // 'urgent' | 'medium' | 'flexible'
-    glossaryOpen: false
+    glossaryOpen: false,
+    currentRoute: pages[0].route
 };
 
 const BuyerProfileContext = createContext({

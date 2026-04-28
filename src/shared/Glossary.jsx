@@ -53,7 +53,7 @@ function Glossary() {
     }
 
     return (
-        <div className={"container"}>
+        <div className={"glossary"}>
             <Button
                 className="glossaryButton"
                 variant="contained"
