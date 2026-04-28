@@ -13,9 +13,15 @@ function NumberStat({ altCaption, altValue, label, value, valueColor, method, ca
     useEffect(() => {
         if (!method?.label.includes("FHA")) {
             setIsOn(false);
+            if (onToggle) {
+                onToggle(true);
+            }
         }
         else {
             setIsOn(true);
+            if (onToggle) {
+                onToggle(false);
+            }
         }
     }, [method])
 
