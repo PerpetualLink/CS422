@@ -1,7 +1,7 @@
 import { useEffect } from "react";
 import { Typography } from "@mui/material";
 import { Link } from "react-router-dom";
-import Glossary from "./glossary";
+import Glossary from "./Glossary";
 import "./Nav.scss";
 import { useBuyerProfile } from "./BuyerProfileContext";
 import { pages } from "./navigation";
