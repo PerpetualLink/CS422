@@ -3,12 +3,11 @@ export const keywords = [
         TERM: "Amortization",
         DEFINITION: `The process of spreading out a loan into a series of fixed, regular payments over time, where each payment covers both principal and interest. 
         This breaks the loan plus interest into fixed monthly payments rather than needing to account for the changes in the principal and interest over the course of the loan.`,
-        EXTRA_DEFINITION: `The formula is as follows:                                                   
-        [M = P * r * ((1+r)^n / ((1+r)^n - 1))].                                   
-                                                                                                                                                        
-        M = Monthly Payment                                                          
-        P = Loan Amount (Principal)                                               
-        r = monthly interest rate (Interest Rate / 12)                   
+        EXTRA_DEFINITION: `The formula is as follows:
+        [M = P * r * ((1+r)^n / ((1+r)^n - 1))]. \n
+        M = Monthly Payment
+        P = Loan Amount (Principal)
+        r = monthly interest rate (Interest Rate / 12)
         n = Total number of payments `
     },
     {

@@ -135,7 +135,8 @@ function Glossary() {
                             {item?.EXTRA_DEFINITION && 
                                 <Typography variant="body2" sx={{ 
                                     color: "#555", 
-                                    lineHeight: 1.6 
+                                    lineHeight: 1.6, 
+                                    whiteSpace: "pre-line"
                                 }}>
                                     {item.EXTRA_DEFINITION}
                                 </Typography>
